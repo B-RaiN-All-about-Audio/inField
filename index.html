@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inField — Stay on the job. Never miss the opportunity.</title>
+  <style>
+    /* =====================================================================
+       100% SELF-CONTAINED NATIVE CSS DESIGN SYSTEM
+       Works instantaneously in Canvas even with zero external CDN access!
+       Palette:
+         Primary Background: #F8FAFC
+         Primary Text:       #111827
+         Brand Navy:         #142D4E
+         Accent Green:       #23B67A
+         Secondary Text:     #64748B
+         Card Background:    #FFFFFF
+         Borders:            #E5E7EB
+       ===================================================================== */
+    :root {
+      --bg-primary: #F8FAFC;
+      --text-primary: #111827;
+      --brand-navy: #142D4E;
+      --brand-navy-hover: #1E3A5F;
+      --accent-green: #23B67A;
+      --accent-green-hover: #1D9E69;
+      --accent-green-soft: #ECFDF5;
+      --accent-green-border: #A7F3D0;
+      --text-secondary: #64748B;
+      --card-bg: #FFFFFF;
+      --border-color: #E5E7EB;
+      --amber-soft: #FFFBEB;
+      --amber-border: #FDE68A;
+      --amber-text: #B45309;
+      --rose-soft: #FEF2F2;
+      --rose-border: #FECACA;
+      --rose-text: #BE123C;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: #F8FAFC !important;
+      color: #111827 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Layout Containers */
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-primary);
+    }
+
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .container-main {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #0F172A;
+      border: 1px solid #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(20, 45, 78, 0.12);
+    }
+
+    .brand-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .brand-name {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--brand-navy);
+    }
+
+    .brand-tagline {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Navigation Tabs */
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0;
+    }
+
+    .nav-btn {
+      appearance: none;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.16s ease;
+    }
+
+    .nav-btn:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    .nav-btn-active {
+      background: var(--brand-navy) !important;
+      color: #FFFFFF !important;
+      border-color: var(--brand-navy) !important;
+      box-shadow: 0 2px 6px rgba(20, 45, 78, 0.18);
+    }
+
+    .nav-badge {
+      background: var(--accent-green);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 999px;
+    }
+
+    /* Cards & Surfaces */
+    .infield-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(17, 24, 39, 0.04);
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .infield-soft-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .lead-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lead-card:hover {
+      border-color: #94A3B8;
+    }
+
+    .lead-card-selected {
+      border: 2px solid var(--brand-navy) !important;
+      background: #F8FAFC !important;
+      box-shadow: 0 4px 12px rgba(20, 45, 78, 0.08);
+    }
+
+    /* Grid Helpers */
+    .stack-lg {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .stack-md {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .stack-sm {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .row-between {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .row-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .split-inbox {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 900px) {
+      .split-inbox {
+        grid-template-columns: 5fr 7fr;
+      }
+    }
+
+    /* Status Banners & Badges */
+    .status-banner-active {
+      background: var(--accent-green-soft);
+      border: 1px solid var(--accent-green-border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .status-banner-paused {
+      background: var(--rose-soft);
+      border: 1px solid var(--rose-border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .status-banner-warn {
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .pill-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--accent-green-soft);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .pill-navy {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #EFF6FF;
+      color: var(--brand-navy);
+      border: 1px solid #BFDBFE;
+    }
+
+    .pill-gray {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #F1F5F9;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Buttons */
+    .btn {
+      appearance: none;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 9px 15px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-navy {
+      background: var(--brand-navy);
+      color: #FFFFFF;
+    }
+    .btn-navy:hover {
+      background: var(--brand-navy-hover);
+    }
+
+    .btn-green {
+      background: var(--accent-green);
+      color: #FFFFFF;
+    }
+    .btn-green:hover {
+      background: var(--accent-green-hover);
+    }
+
+    .btn-outline {
+      background: #FFFFFF;
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+    .btn-outline:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    .btn-scenario {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .btn-scenario:hover {
+      border-color: var(--brand-navy);
+      background: #F8FAFC;
+      transform: translateY(-1px);
+    }
+
+    /* Inputs & Selects */
+    .input-field, .select-field, .textarea-field {
+      width: 100%;
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: 11px;
+      padding: 9px 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .input-field:focus, .select-field:focus, .textarea-field:focus {
+      border-color: var(--brand-navy);
+      background: #FFFFFF;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      width: 52px;
+      height: 30px;
+      border-radius: 999px;
+      padding: 3px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .toggle-on {
+      background-color: var(--accent-green);
+      justify-content: flex-end;
+    }
+    .toggle-off {
+      background-color: #CBD5E1;
+      justify-content: flex-start;
+    }
+    .toggle-knob {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Chat Bubbles */
+    .chat-scroll {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px;
+      max-height: 310px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bubble-bot {
+      align-self: flex-end;
+      max-width: 82%;
+      background: var(--brand-navy);
+      color: #FFFFFF;
+      padding: 10px 14px;
+      border-radius: 16px 16px 4px 16px;
+      font-size: 12.5px;
+    }
+
+    .bubble-owner {
+      align-self: flex-end;
+      max-width: 82%;
+      background: var(--accent-green);
+      color: #FFFFFF;
+      padding: 10px 14px;
+      border-radius: 16px 16px 4px 16px;
+      font-size: 12.5px;
+    }
+
+    .bubble-customer {
+      align-self: flex-start;
+      max-width: 82%;
+      background: #FFFFFF;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 16px 16px 16px 4px;
+      font-size: 12.5px;
+    }
+
+    .bubble-system {
+      align-self: center;
+      background: #E2E8F0;
+      color: #475569;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Code Block */
+    .code-console {
+      background: #0F172A;
+      color: #E2E8F0;
+      border-radius: 14px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.55;
+      overflow-x: auto;
+      max-height: 460px;
+      overflow-y: auto;
+      border: 1px solid #1E293B;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+    }
+
+    /* Toast */
+    .toast-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 70;
+      background: var(--brand-navy);
+      color: #FFFFFF;
+      padding: 14px 18px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(20, 45, 78, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 360px;
+    }
+
+    .metric-number {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--brand-navy);
+      line-height: 1.1;
+    }
+    .metric-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .metric-sub {
+      font-size: 11px;
+      color: #94A3B8;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- =====================================================================
+         TOP BRAND HEADER & 4 PRIMARY NAVIGATION TABS
+         ===================================================================== -->
+    <header class="top-header">
+      <div class="container-main header-inner">
+        <!-- Brand Identity: Custom Inline SVG (Greasy Hand + Glowing Phone + Bolt) -->
+        <div class="brand-row">
+          <div class="brand-logo-wrap" title="inField — Greasy Hand + Glowing Phone Mark">
+            <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Glowing Smartphone Body -->
+              <rect x="20" y="8" width="26" height="44" rx="5" fill="#1E293B" stroke="#3B82F6" stroke-width="2.5"/>
+              <rect x="23" y="13" width="20" height="33" rx="2.5" fill="#0F172A"/>
+              <!-- Greasy Working Hand Thumb & Fingers Gripping Phone -->
+              <path d="M13 28C13 25.5 15 24 18 24H21V32H17C14.5 32 13 30.2 13 28Z" fill="#94A3B8" stroke="#475569" stroke-width="1.5"/>
+              <path d="M45 20H49C51.2 20 53 21.8 53 24C53 26.2 51.2 28 49 28H45V20Z" fill="#94A3B8" stroke="#475569" stroke-width="1.5"/>
+              <path d="M45 29H50C52.2 29 54 30.8 54 33C54 35.2 52.2 37 50 37H45V29Z" fill="#94A3B8" stroke="#475569" stroke-width="1.5"/>
+              <path d="M45 38H48C50.2 38 52 39.8 52 42C52 44.2 50.2 46 48 46H45V38Z" fill="#94A3B8" stroke="#475569" stroke-width="1.5"/>
+              <!-- Grease Smudges on Knuckles -->
+              <circle cx="17" cy="27" r="1.6" fill="#1E293B"/>
+              <circle cx="49" cy="24" r="1.5" fill="#1E293B"/>
+              <circle cx="50" cy="33" r="1.7" fill="#1E293B"/>
+              <!-- Instant SMS Lightning Notification on Screen -->
+              <path d="M35 17L27 29H33L31 41L39 28H33L35 17Z" fill="#23B67A" stroke="#FFFFFF" stroke-width="1"/>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-title-row">
+              <span class="brand-name">inField</span>
+              <span id="header-mode-pill" class="pill-green">🟢 Active Protection</span>
+            </div>
+            <p class="brand-tagline">
+              Stay on the job. Never miss the opportunity. • Line:
+              <strong id="header-twilio-num">(910) 335-8490</strong> →
+              <span id="header-cell-num">(910) 787-2450</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 Primary Navigation Tabs + 5-Min Onboarding Setup -->
+        <nav class="nav-bar" aria-label="Primary Navigation">
+          <button type="button" id="tab-home" onclick="switchView('home')" class="nav-btn nav-btn-active">
+            <span>🏠 Home</span>
+          </button>
+          <button type="button" id="tab-inbox" onclick="switchView('inbox')" class="nav-btn">
+            <span>📥 Leads</span>
+            <span id="nav-unread-badge" class="nav-badge">3</span>
+          </button>
+          <button type="button" id="tab-automations" onclick="switchView('automations')" class="nav-btn">
+            <span>⚡ Automations</span>
+          </button>
+          <button type="button" id="tab-settings" onclick="switchView('settings')" class="nav-btn">
+            <span>⚙️ Settings</span>
+          </button>
+          <button type="button" id="btn-open-onboarding" onclick="openOnboardingModal()" class="nav-btn">
+            <span>✨ 5-Min Setup</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Push Notification Alert Bar -->
+    <div id="push-notification-bar" class="hidden" style="background:#142D4E;color:#FFFFFF;padding:10px 16px;">
+      <div class="container-main row-between">
+        <div class="row-wrap">
+          <span class="pill-green">Push Notification</span>
+          <span id="push-notification-text" style="font-weight:600;font-size:13px;">New customer inquiry captured by inField.</span>
+        </div>
+        <div class="row-wrap">
+          <button type="button" onclick="switchView('inbox')" class="btn btn-green" style="padding:5px 12px;font-size:12px;">View Lead →</button>
+          <button type="button" onclick="dismissPushBanner()" class="btn btn-outline" style="padding:4px 9px;font-size:11px;">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         MAIN WORKSPACE
+         ===================================================================== -->
+    <main class="container-main" style="padding-top:22px;padding-bottom:44px;flex:1;">
+
+      <!-- ===================================================================
+           TAB 1: HOME DASHBOARD
+           =================================================================== -->
+      <section id="view-home" class="stack-lg">
+        <!-- Welcome & Prominent Status Card -->
+        <div class="infield-card">
+          <div class="row-between">
+            <div>
+              <h1 id="home-welcome-heading" style="font-size:24px;font-weight:800;color:#111827;">
+                Good morning, Mike 👋
+              </h1>
+              <p style="font-size:14px;color:#64748B;font-weight:500;margin-top:2px;">
+                "Your business is covered."
+              </p>
+            </div>
+            <div class="row-wrap">
+              <button type="button" id="btn-toggle-empty" onclick="toggleEmptyStatePreview()" class="btn btn-outline">
+                Preview Empty State
+              </button>
+              <button type="button" onclick="switchView('automations')" class="btn btn-navy">
+                Automation Controls →
+              </button>
+            </div>
+          </div>
+
+          <!-- Prominent Automation Status Banner -->
+          <div id="home-protection-banner" class="status-banner-active">
+            <div>
+              <p id="home-status-title" style="font-size:17px;font-weight:800;color:#111827;">
+                🟢 inField is Active
+              </p>
+              <p id="home-status-subtitle" style="font-size:13px;color:#475569;margin-top:2px;">
+                "Your missed calls are being handled."
+              </p>
+            </div>
+
+            <div class="infield-soft-box" style="background:#FFFFFF;padding:10px 14px;">
+              <div class="row-wrap">
+                <span id="routing-indicator-dot" style="width:9px;height:9px;border-radius:50%;background:#23B67A;display:inline-block;"></span>
+                <span id="routing-indicator-text" style="font-size:12px;font-weight:700;color:#111827;">Phone Routing &amp; SMS Connected</span>
+              </div>
+              <p id="routing-numbers-sub" style="font-size:11px;color:#64748B;margin-top:2px;font-family:monospace;">
+                inField (910) 335-8490 → Forwarding to (910) 787-2450
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Simple Performance Cards -->
+        <div class="grid-3">
+          <div class="infield-card row-between">
+            <div>
+              <p id="metric-missed-calls" class="metric-number">8</p>
+              <p class="metric-label">Missed Calls Captured</p>
+              <p class="metric-sub">Today's activity</p>
+            </div>
+            <div style="font-size:26px;background:#F1F5F9;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+              📞
+            </div>
+          </div>
+
+          <div class="infield-card row-between">
+            <div>
+              <p id="metric-auto-replies" class="metric-number">8</p>
+              <p class="metric-label">Automatic Replies Sent</p>
+              <p class="metric-sub" style="color:#23B67A;font-weight:600;">100% instant response</p>
+            </div>
+            <div style="font-size:26px;background:#ECFDF5;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+              💬
+            </div>
+          </div>
+
+          <div class="infield-card row-between">
+            <div>
+              <p id="metric-needs-attention" class="metric-number" style="color:#23B67A;">3</p>
+              <p class="metric-label">Leads Need Attention</p>
+              <p class="metric-sub">Status: New</p>
+            </div>
+            <div style="font-size:26px;background:#FFFBEB;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+              🔔
+            </div>
+          </div>
+        </div>
+
+        <!-- Functional Demo Mode Bar (Scenarios A–G + 3-Step Workflow) -->
+        <div class="infield-card stack-md">
+          <div class="row-between">
+            <div>
+              <div class="row-wrap">
+                <span class="pill-navy">Functional Demo Mode</span>
+                <h2 style="font-size:16px;font-weight:800;color:#111827;">Interactive Scenario Tester (Scenarios A–G &amp; 3-Step Workflow)</h2>
+              </div>
+              <p style="font-size:12.5px;color:#64748B;margin-top:3px;">
+                Tap any scenario below to simulate the complete workflow without sending real carrier texts.
+              </p>
+            </div>
+            <button type="button" onclick="switchView('simulator')" class="btn btn-navy">
+              ⚡ Open 3-Step Triage &amp; Quote Studio →
+            </button>
+          </div>
+
+          <div class="grid-4">
+            <button type="button" onclick="runDemoScenario('A')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">📞 Scenario A: Missed Call</strong>
+              <span style="color:#64748B;font-size:11.5px;">Unanswered call → instant personalized SMS text-back</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('B')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">💬 Scenario B: Customer Intake</strong>
+              <span style="color:#64748B;font-size:11.5px;">Replies "My refrigerator stopped cooling" + ZIP "28445"</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('C')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">🙋‍♂️ Scenario C: Owner Takes Over</strong>
+              <span style="color:#64748B;font-size:11.5px;">Mike replies manually → stops bot intake &amp; marks Contacted</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('D')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">⏱️ Scenario D: 30m Follow-Up</strong>
+              <span style="color:#64748B;font-size:11.5px;">No reply after 30 mins → sends single polite follow-up</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('E')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">⏸️ Scenario E: Automation Off</strong>
+              <span style="color:#64748B;font-size:11.5px;">Disables text-back → missed call sends 0 texts &amp; shows paused</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('F')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">✅ Scenario F: Answered Call</strong>
+              <span style="color:#64748B;font-size:11.5px;">Owner answers call → zero missed-call SMS triggered</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('G')" class="btn-scenario">
+              <strong style="color:#142D4E;font-size:12.5px;">🛡️ Scenario G: Duplicate Webhook</strong>
+              <span style="color:#64748B;font-size:11.5px;">Twilio retries same CallSid → idempotency blocks duplicate</span>
+            </button>
+
+            <button type="button" onclick="runDemoScenario('THREE_STEP')" class="btn-scenario" style="background:#ECFDF5;border-color:#A7F3D0;">
+              <strong style="color:#142D4E;font-size:12.5px;">🏷️ 3-Step Tag → Quote → Review</strong>
+              <span style="color:#475569;font-size:11.5px;">Smart Intake Link → Model Tag OCR → 1-Tap Stripe &amp; Review</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent Activity Feed -->
+        <div class="infield-card stack-md">
+          <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:12px;">
+            <div>
+              <h2 style="font-size:18px;font-weight:800;color:#111827;">Recent Activity</h2>
+              <p style="font-size:12px;color:#64748B;">Live feed of missed calls, automated texts, and customer replies</p>
+            </div>
+            <button type="button" onclick="switchView('inbox')" class="btn btn-navy">
+              View Lead →
+            </button>
+          </div>
+
+          <!-- Empty State -->
+          <div id="home-empty-state" class="hidden" style="text-align:center;padding:36px 16px;">
+            <div style="font-size:32px;margin-bottom:8px;">🛡️</div>
+            <h3 style="font-size:16px;font-weight:800;color:#111827;">
+              "You're all set. When a customer calls and you can't answer, inField has your back."
+            </h3>
+            <p style="font-size:12.5px;color:#64748B;margin-top:4px;">
+              inField is quietly monitoring your line in the background.
+            </p>
+          </div>
+
+          <!-- Activity Stream -->
+          <div id="home-activity-feed" class="stack-sm"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 2: LEADS (SIMPLE CUSTOMER LEAD INBOX)
+           =================================================================== -->
+      <section id="view-inbox" class="hidden stack-lg">
+        <!-- Filter & Search Bar -->
+        <div class="infield-card row-between">
+          <div class="row-wrap">
+            <button type="button" onclick="setStatusFilter('all')" id="filter-all" class="btn btn-navy">All (4)</button>
+            <button type="button" onclick="setStatusFilter('New')" id="filter-new" class="btn btn-outline">🔴 New (Needs Reply)</button>
+            <button type="button" onclick="setStatusFilter('Contacted')" id="filter-contacted" class="btn btn-outline">🔵 Contacted</button>
+            <button type="button" onclick="setStatusFilter('Closed')" id="filter-closed" class="btn btn-outline">✅ Closed</button>
+            <button type="button" onclick="setStatusFilter('Photo Triaged')" id="filter-triaged" class="btn btn-outline">📸 Photo Triaged</button>
+            <button type="button" onclick="setStatusFilter('Awaiting Photo')" id="filter-awaiting" class="btn btn-outline">⏳ Awaiting Photo</button>
+            <button type="button" onclick="setStatusFilter('Quote Sent')" id="filter-quoted" class="btn btn-outline">🧾 Quote Sent</button>
+            <button type="button" onclick="setStatusFilter('Paid & Reviewed')" id="filter-paid" class="btn btn-outline">✅ Paid</button>
+          </div>
+
+          <div class="row-wrap" style="flex:1;max-width:380px;justify-content:flex-end;">
+            <input
+              type="text"
+              id="lead-search-input"
+              oninput="renderLeadsList()"
+              placeholder="Search phone, service, ZIP..."
+              class="input-field"
+              style="max-width:210px;"
+            />
+            <button type="button" onclick="runDemoScenario('A')" class="btn btn-green">
+              + Simulate Missed Call
+            </button>
+          </div>
+        </div>
+
+        <!-- Master-Detail Inbox Grid -->
+        <div class="split-inbox">
+          <div id="leads-list-container" class="stack-md"></div>
+          <div id="lead-detail-container" class="stack-md"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 3: AUTOMATIONS (SIMPLE AUTOMATION CONTROLS)
+           =================================================================== -->
+      <section id="view-automations" class="hidden stack-lg">
+        <div class="infield-card stack-md">
+          <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:14px;">
+            <div>
+              <h1 style="font-size:20px;font-weight:800;color:#111827;">Simple Automation Controls</h1>
+              <p style="font-size:13px;color:#64748B;">Understand and control your missed-call assistant at a glance.</p>
+            </div>
+            <span id="automations-summary-pill" class="pill-green">4 of 4 Automations ON</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Toggle 1 -->
+            <div class="infield-soft-box row-between">
+              <div style="flex:1;">
+                <div class="row-wrap">
+                  <strong style="font-size:14px;color:#111827;">Missed-Call Text Back</strong>
+                  <span id="badge-toggle-missed" class="pill-green">ON</span>
+                </div>
+                <p style="font-size:12px;color:#64748B;margin-top:4px;">
+                  Automatically texts callers when you can't answer the phone.
+                </p>
+              </div>
+              <button type="button" id="toggle-btn-missed" onclick="toggleAutomationSetting('missedCallEnabled')" class="toggle-switch toggle-on" aria-label="Toggle Missed-Call Text Back">
+                <div id="knob-missed" class="toggle-knob"></div>
+              </button>
+            </div>
+
+            <!-- Toggle 2 -->
+            <div class="infield-soft-box row-between">
+              <div style="flex:1;">
+                <div class="row-wrap">
+                  <strong style="font-size:14px;color:#111827;">Customer Intake</strong>
+                  <span id="badge-toggle-intake" class="pill-green">ON</span>
+                </div>
+                <p style="font-size:12px;color:#64748B;margin-top:4px;">
+                  Conversational SMS capture for service needed, ZIP code, and photos.
+                </p>
+              </div>
+              <button type="button" id="toggle-btn-intake" onclick="toggleAutomationSetting('intakeEnabled')" class="toggle-switch toggle-on" aria-label="Toggle Customer Intake">
+                <div id="knob-intake" class="toggle-knob"></div>
+              </button>
+            </div>
+
+            <!-- Toggle 3 -->
+            <div class="infield-soft-box row-between">
+              <div style="flex:1;">
+                <div class="row-wrap">
+                  <strong style="font-size:14px;color:#111827;">Automatic Follow-Up</strong>
+                  <span id="badge-toggle-followup" class="pill-green">ON</span>
+                </div>
+                <p style="font-size:12px;color:#64748B;margin-top:4px;">
+                  Sends one polite follow-up after 30 minutes if the caller hasn't replied.
+                </p>
+              </div>
+              <button type="button" id="toggle-btn-followup" onclick="toggleAutomationSetting('followupEnabled')" class="toggle-switch toggle-on" aria-label="Toggle Automatic Follow-Up">
+                <div id="knob-followup" class="toggle-knob"></div>
+              </button>
+            </div>
+
+            <!-- Toggle 4 -->
+            <div class="infield-soft-box row-between">
+              <div style="flex:1;">
+                <div class="row-wrap">
+                  <strong style="font-size:14px;color:#111827;">After-Hours Replies</strong>
+                  <span id="badge-toggle-afterhours" class="pill-green">ON</span>
+                </div>
+                <p style="font-size:12px;color:#64748B;margin-top:4px;">
+                  Sends your after-hours greeting outside your configured business hours.
+                </p>
+              </div>
+              <button type="button" id="toggle-btn-afterhours" onclick="toggleAutomationSetting('afterHoursEnabled')" class="toggle-switch toggle-on" aria-label="Toggle After-Hours Replies">
+                <div id="knob-afterhours" class="toggle-knob"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Templates & Live Preview -->
+        <div class="split-inbox">
+          <div class="infield-card stack-md">
+            <div class="row-between">
+              <h2 style="font-size:16px;font-weight:800;color:#111827;">Customize Automated Messages</h2>
+              <button type="button" onclick="useSmartIntakeTemplate()" class="btn btn-outline">
+                📸 Use 3-Step Smart Intake Link Template
+              </button>
+            </div>
+
+            <div>
+              <label for="input-initial-template" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">
+                1. Missed-Call Text Back Message (Supports {business_name})
+              </label>
+              <textarea id="input-initial-template" rows="3" oninput="updateAutomationTemplates()" class="textarea-field">Hey! Thanks for calling {business_name}. Sorry we missed your call! We're probably out helping another customer. What can we help you with today? Just reply here and we'll get back to you ASAP.</textarea>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="input-followup-template" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">
+                  2. Single Follow-Up Message
+                </label>
+                <textarea id="input-followup-template" rows="2" oninput="updateAutomationTemplates()" class="textarea-field">Hey! Just following up to make sure you got our message. If you still need help, just reply here and we'll get back to you!</textarea>
+              </div>
+              <div>
+                <label for="input-followup-delay" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">
+                  Follow-Up Delay
+                </label>
+                <select id="input-followup-delay" onchange="updateAutomationTemplates()" class="select-field">
+                  <option value="15">15 minutes</option>
+                  <option value="30" selected>30 minutes (Default)</option>
+                  <option value="60">60 minutes</option>
+                </select>
+                <p style="font-size:11px;color:#64748B;margin-top:4px;">Never sends after customer or owner replies.</p>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="input-afterhours-template" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">
+                  3. After-Hours Message
+                </label>
+                <textarea id="input-afterhours-template" rows="2" oninput="updateAutomationTemplates()" class="textarea-field">Thanks for reaching out to {business_name}! We're currently closed, but we'll get back to you when we're open. Feel free to text us what you need help with.</textarea>
+              </div>
+              <div>
+                <label for="input-business-hours" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">
+                  Business Hours
+                </label>
+                <select id="input-business-hours" onchange="updateAutomationTemplates()" class="select-field">
+                  <option value="8:00 AM – 6:00 PM (Mon–Sat)" selected>8:00 AM – 6:00 PM (Mon–Sat)</option>
+                  <option value="7:00 AM – 5:00 PM (Mon–Fri)">7:00 AM – 5:00 PM (Mon–Fri)</option>
+                </select>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#64748B;margin-top:8px;cursor:pointer;">
+                  <input type="checkbox" id="chk-sim-afterhours" onchange="updateAutomationTemplates()" />
+                  <span>Preview After-Hours Mode Now</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="infield-card stack-md">
+            <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:10px;">
+              <strong style="font-size:13px;color:#64748B;text-transform:uppercase;">Live Customer SMS Preview</strong>
+              <span class="pill-green">From: (910) 335-8490</span>
+            </div>
+            <div class="chat-scroll">
+              <div class="bubble-system">📞 Unanswered Call → Auto-Reply Sent</div>
+              <div id="live-sms-preview-initial" class="bubble-bot">
+                Hey! Thanks for calling Mike's Appliance Repair. Sorry we missed your call! We're probably out helping another customer. What can we help you with today? Just reply here and we'll get back to you ASAP.
+              </div>
+              <div class="bubble-customer">"My refrigerator stopped cooling."</div>
+              <div class="bubble-bot">Got it! What area or ZIP code are you located in?</div>
+              <div class="bubble-customer">"28445"</div>
+              <div id="live-sms-preview-confirm" class="bubble-owner">Thanks! Mike will get back to you as soon as he can.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 4: SETTINGS, PHONE ROUTING & PRO STUDIO LINKS
+           =================================================================== -->
+      <section id="view-settings" class="hidden stack-lg">
+        <div class="grid-2">
+          <!-- Business Profile -->
+          <div class="infield-card stack-md">
+            <div style="border-bottom:1px solid #E5E7EB;padding-bottom:10px;">
+              <h2 style="font-size:18px;font-weight:800;color:#111827;">Business Profile</h2>
+              <p style="font-size:12px;color:#64748B;">Personalizes your automatic replies and intake confirmation.</p>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="prof-biz-name" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Business Name</label>
+                <input type="text" id="prof-biz-name" value="Mike's Appliance Repair" oninput="saveBusinessProfile()" class="input-field" />
+              </div>
+              <div>
+                <label for="prof-owner-name" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Owner's First Name</label>
+                <input type="text" id="prof-owner-name" value="Mike" oninput="saveBusinessProfile()" class="input-field" />
+              </div>
+              <div>
+                <label for="prof-category" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Business Category</label>
+                <select id="prof-category" onchange="saveBusinessProfile()" class="select-field">
+                  <option value="Appliance Repair" selected>Appliance Repair Technician</option>
+                  <option value="General Contractor / Handyman">General Contractor / Handyman</option>
+                  <option value="Heavy Equipment & Grading">Heavy Equipment &amp; Grading</option>
+                  <option value="Pressure Washing">Pressure Washing Business</option>
+                </select>
+              </div>
+              <div>
+                <label for="prof-zip" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Business ZIP Code</label>
+                <input type="text" id="prof-zip" value="28445" oninput="saveBusinessProfile()" class="input-field" />
+              </div>
+              <div>
+                <label for="prof-timezone" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Time Zone</label>
+                <select id="prof-timezone" onchange="saveBusinessProfile()" class="select-field">
+                  <option value="America/New_York" selected>Eastern Time (America/New_York)</option>
+                  <option value="America/Chicago">Central Time (America/Chicago)</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:flex-end;">
+                <button type="button" onclick="loadBrandonProfilePreset()" class="btn btn-outline" style="width:100%;">
+                  Load Brandon (Jacksonville, NC) Preset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Connection & Carrier Conditional Call Forwarding -->
+          <div class="infield-card stack-md">
+            <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:10px;">
+              <div>
+                <h2 style="font-size:18px;font-weight:800;color:#111827;">Phone Service &amp; Call Forwarding</h2>
+                <p style="font-size:12px;color:#64748B;">Runs on the server even when the mobile app is closed.</p>
+              </div>
+              <span id="settings-conn-badge" class="pill-green">Connected ✓</span>
+            </div>
+
+            <div class="infield-soft-box stack-sm" style="font-size:12.5px;color:#475569;">
+              <strong style="color:#111827;">How inField Works With Your Existing Phone:</strong>
+              <p>
+                Ordinary iOS/Android apps cannot read missed calls and send background SMS directly from your personal SIM. Instead, <strong>inField</strong> uses a dedicated Twilio business number (<code>(910) 335-8490</code>) that forwards calls to your cell (<code>(910) 787-2450</code>) or catches unanswered calls via carrier <strong>Conditional Call Forwarding</strong> (<code>*71</code>).
+              </p>
+              <p style="background:#FFFBEB;border:1px solid #FDE68A;color:#B45309;padding:8px 10px;border-radius:10px;font-size:11.5px;">
+                <strong>Voicemail &amp; Carrier Note:</strong> Set your ring timeout (15–18s) shorter than your carrier voicemail pickup (~25s), and complete US A2P 10DLC registration for live carrier SMS delivery.
+              </p>
+            </div>
+
+            <div class="row-wrap">
+              <button type="button" onclick="testPhoneRoutingConnection()" class="btn btn-green">✓ Test Phone Connection</button>
+              <button type="button" id="btn-disconnect-number" onclick="togglePhoneConnectionStatus()" class="btn btn-outline">Disconnect Number &amp; Pause</button>
+              <button type="button" onclick="switchView('setup')" class="btn btn-navy">🛠️ View Twilio &amp; SQL Code</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Studio Shortcuts -->
+        <div class="infield-card row-between">
+          <div>
+            <h3 style="font-size:15px;font-weight:800;color:#111827;">3-Step Field Workflow &amp; Developer Tools</h3>
+            <p style="font-size:12px;color:#64748B;">Open the live Twilio webhook simulator, 1-Tap Estimate &amp; Stripe Quote Builder, or Backend Code Inspector.</p>
+          </div>
+          <div class="row-wrap">
+            <button type="button" id="tab-simulator" onclick="switchView('simulator')" class="btn btn-navy">⚡ Twilio Live Simulator</button>
+            <button type="button" id="tab-quote" onclick="switchView('quote')" class="btn btn-green">🧾 1-Tap Quote &amp; Pay</button>
+            <button type="button" id="tab-setup" onclick="switchView('setup')" class="btn btn-outline">🛠️ Twilio Webhook Code</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           STUDIO VIEW: TWILIO LIVE SIMULATOR (view-simulator)
+           =================================================================== -->
+      <section id="view-simulator" class="hidden stack-lg">
+        <div class="infield-card row-between">
+          <div>
+            <span class="pill-green">3-Step Workflow Simulator</span>
+            <h2 style="font-size:19px;font-weight:800;color:#111827;margin-top:4px;">
+              1. Missed Call → Smart Intake Link • 2. AI Tag &amp; Symptom Triage • 3. 1-Tap Quote
+            </h2>
+          </div>
+          <div class="row-wrap">
+            <select id="sim-tech-mode" onchange="updateSimTechMode()" class="select-field" style="width:auto;">
+              <option value="busy">🔧 On Active Job (Auto-Bounce After Timeout)</option>
+              <option value="instant">⚡ Do Not Disturb (Instant Bounce-Back)</option>
+              <option value="available">📞 Available (Tech Answers Call)</option>
+            </select>
+            <button type="button" onclick="switchView('home')" class="btn btn-outline">← Back Home</button>
+          </div>
+        </div>
+
+        <div class="split-inbox">
+          <div class="infield-card stack-md">
+            <label for="sim-scenario-select" style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;">
+              Select Customer Scenario
+            </label>
+            <select id="sim-scenario-select" onchange="selectSimulatorScenario()" class="select-field">
+              <option value="refrigerator">Caller (910) 555-0142 — Refrigerator Stopped Cooling (ZIP 28445)</option>
+              <option value="appliance">Sarah Jenkins • (910) 555-0142 — Whirlpool Dishwasher Model Tag WDT750SAKZ0</option>
+              <option value="grading">Mike Mercer • (910) 555-0188 — Stormwater Washout &amp; Culvert Re-Grade</option>
+              <option value="handyman">Cynthia May • (910) 555-0194 — Full Deck &amp; Siding Pressure Wash</option>
+            </select>
+
+            <div id="sim-phone-screen" class="infield-soft-box" style="min-height:220px;"></div>
+
+            <div class="grid-2">
+              <button type="button" id="btn-sim-call" onclick="triggerSimulatedCall()" class="btn btn-navy">
+                📞 Step 1: Dial Tech Now
+              </button>
+              <button type="button" id="btn-sim-mms" onclick="triggerSimulatedMMS()" class="btn btn-green">
+                📸 Step 2: Text Photo + Tag
+              </button>
+            </div>
+            <button type="button" onclick="openSimulatedLeadInInbox()" class="btn btn-outline" style="width:100%;">
+              Open Active Lead in Field Inbox →
+            </button>
+          </div>
+
+          <div class="infield-card stack-md">
+            <div class="row-between">
+              <strong style="font-size:14px;color:#111827;">Live Twilio Webhook Event Log</strong>
+              <button type="button" onclick="clearWebhookLogs()" class="btn btn-outline" style="padding:5px 10px;font-size:11px;">Clear Console</button>
+            </div>
+            <div id="webhook-log-stream" class="code-console"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           STUDIO VIEW: 1-TAP QUOTE & STRIPE INVOICE BUILDER (view-quote)
+           =================================================================== -->
+      <section id="view-quote" class="hidden stack-lg">
+        <div class="infield-card row-between">
+          <div>
+            <span class="pill-green">Step 3 of 3-Step Workflow</span>
+            <h2 style="font-size:19px;font-weight:800;color:#111827;margin-top:4px;">1-Tap Estimate, Stripe Link &amp; Google Review Booster</h2>
+          </div>
+          <div class="row-wrap">
+            <select id="quote-lead-select" onchange="loadLeadIntoQuoteBuilder(this.value)" class="select-field" style="width:auto;"></select>
+            <button type="button" onclick="switchView('inbox')" class="btn btn-outline">← Back to Leads</button>
+          </div>
+        </div>
+
+        <div class="split-inbox">
+          <div class="infield-card stack-md">
+            <p style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;">Quick-Add Trade Presets</p>
+            <div class="row-wrap">
+              <button type="button" onclick="addPresetLineItem('Drain Pump Assembly #W10876537 + Install', 1, 165)" class="btn btn-outline">+ Dishwasher Drain Pump ($165)</button>
+              <button type="button" onclick="addPresetLineItem('Appliance Diagnostic &amp; Multimeter Circuit Test', 1, 85)" class="btn btn-outline">+ Diagnostic Trip Fee ($85)</button>
+              <button type="button" onclick="addPresetLineItem('Skid Steer Ditch Cut, Culvert Grade &amp; Silt Fence', 1, 650)" class="btn btn-outline">+ Grading &amp; Berm Repair ($650)</button>
+              <button type="button" onclick="addPresetLineItem('Front/Back Porch Deck &amp; Siding Pressure Wash', 1, 325)" class="btn btn-outline">+ Full Porch/Deck Wash ($325)</button>
+              <button type="button" onclick="addPresetLineItem('Auxiliary Hydraulic Coupler &amp; Hose Replacement', 1, 290)" class="btn btn-outline">+ Hydraulic Hose &amp; Coupler ($290)</button>
+            </div>
+
+            <div id="quote-items-container" class="stack-sm"></div>
+
+            <div class="row-wrap">
+              <input type="text" id="new-item-desc" placeholder="Part or labor description..." class="input-field" style="flex:2;min-width:160px;" />
+              <input type="number" id="new-item-qty" value="1" min="1" class="input-field" style="width:70px;" />
+              <input type="number" id="new-item-price" placeholder="Price ($)" min="0" step="5" class="input-field" style="width:100px;" />
+              <button type="button" onclick="addCustomQuoteItem()" class="btn btn-navy">+ Add</button>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="quote-eta-input" style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Arrival Window</label>
+                <input type="text" id="quote-eta-input" value="Tomorrow, 9:00 AM – 11:00 AM" oninput="updateQuotePreview()" class="input-field" />
+              </div>
+              <div>
+                <label for="quote-warranty-input" style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Guarantee / Note</label>
+                <input type="text" id="quote-warranty-input" value="90-Day Parts &amp; Labor Guarantee included" oninput="updateQuotePreview()" class="input-field" />
+              </div>
+            </div>
+          </div>
+
+          <div class="infield-card stack-md">
+            <div class="row-between">
+              <strong style="font-size:13px;color:#64748B;text-transform:uppercase;">Customer Estimate Preview</strong>
+              <span id="quote-status-pill" class="pill-green">Ready to Text</span>
+            </div>
+
+            <div class="infield-soft-box stack-sm">
+              <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:8px;">
+                <div>
+                  <strong style="font-size:13px;color:#142D4E;">inField Instant Estimate</strong>
+                  <p id="preview-customer-name" style="font-size:11.5px;color:#64748B;">Prepared for (910) 555-0142</p>
+                </div>
+                <strong id="preview-total-amount" style="font-size:22px;color:#23B67A;">$205.00</strong>
+              </div>
+              <div id="preview-line-items" class="stack-sm" style="font-size:12.5px;"></div>
+              <div style="border-top:1px solid #E5E7EB;padding-top:8px;font-size:11.5px;color:#64748B;">
+                <p>🕒 Window: <strong id="preview-eta-text" style="color:#111827;">Tomorrow, 9:00 AM – 11:00 AM</strong></p>
+                <p>🛡️ Note: <span id="preview-warranty-text">90-Day Parts &amp; Labor Guarantee included</span></p>
+              </div>
+            </div>
+
+            <button type="button" onclick="sendQuoteViaTwilio()" class="btn btn-navy" style="width:100%;padding:12px;">
+              📲 Text Estimate &amp; Stripe Link via Twilio
+            </button>
+            <button type="button" onclick="simulateCustomerPayment()" class="btn btn-green" style="width:100%;padding:11px;">
+              💳 Simulate Customer Stripe Pay + Auto-Review Text
+            </button>
+          </div>
+        </div>
+
+        <div class="hidden">
+          <span id="kpi-revenue">$1,485.00</span>
+          <span id="kpi-leads">4 Leads</span>
+          <span id="kpi-needs-action">3 ready</span>
+          <span id="kpi-reviews">19 ★</span>
+          <button type="button" onclick="switchView('inbox')">📥 Field Inbox 2</button>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           STUDIO VIEW: TWILIO WEBHOOK & SUPABASE SQL CODE (view-setup)
+           =================================================================== -->
+      <section id="view-setup" class="hidden stack-lg">
+        <div class="split-inbox">
+          <div class="infield-card stack-md">
+            <div class="row-between">
+              <h2 style="font-size:17px;font-weight:800;color:#111827;">Twilio &amp; Forwarding Generator</h2>
+              <button type="button" onclick="switchView('settings')" class="btn btn-outline">← Settings</button>
+            </div>
+
+            <div>
+              <label for="cfg-twilio-num" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">inField Twilio Number</label>
+              <input type="text" id="cfg-twilio-num" value="+19103358490" oninput="updateGeneratedCode()" class="input-field" />
+            </div>
+            <div>
+              <label for="cfg-cell-num" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Owner's Existing Phone Number</label>
+              <input type="text" id="cfg-cell-num" value="+19107872450" oninput="updateGeneratedCode()" class="input-field" />
+            </div>
+            <div>
+              <label for="cfg-domain" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Webhook Base URL</label>
+              <input type="text" id="cfg-domain" value="https://infield.supabase.co/functions/v1" oninput="updateGeneratedCode()" class="input-field" />
+            </div>
+            <div class="grid-2">
+              <div>
+                <label for="cfg-timeout" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Ring Timeout (sec)</label>
+                <input type="number" id="cfg-timeout" value="15" min="5" max="60" oninput="updateGeneratedCode()" class="input-field" />
+              </div>
+              <div>
+                <label for="cfg-carrier" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Carrier Forwarding</label>
+                <select id="cfg-carrier" onchange="updateGeneratedCode()" class="select-field">
+                  <option value="verizon">Verizon (*71)</option>
+                  <option value="att">AT&amp;T (*61*)</option>
+                  <option value="tmobile">T-Mobile (**61*)</option>
+                  <option value="direct">Direct Twilio #</option>
+                </select>
+              </div>
+            </div>
+            <div id="carrier-dial-tip" class="infield-soft-box" style="background:#ECFDF5;border-color:#A7F3D0;font-size:12px;"></div>
+
+            <div class="infield-soft-box stack-sm" id="launch-checklist">
+              <strong style="font-size:12.5px;color:#111827;">Deployment Checklist</strong>
+              <label style="display:flex;gap:8px;font-size:12px;"><input type="checkbox" checked onchange="updateChecklistProgress()" /><span>Provision Twilio Voice + SMS number &amp; A2P 10DLC</span></label>
+              <label style="display:flex;gap:8px;font-size:12px;"><input type="checkbox" checked onchange="updateChecklistProgress()" /><span>Run Supabase PostgreSQL migration (7 tables + RLS)</span></label>
+              <label style="display:flex;gap:8px;font-size:12px;"><input type="checkbox" onchange="updateChecklistProgress()" /><span>Configure Twilio Voice &amp; Messaging webhook URLs</span></label>
+              <p id="checklist-status-text" style="font-size:11px;color:#64748B;">2 of 3 deployment steps complete</p>
+            </div>
+          </div>
+
+          <div class="infield-card stack-md">
+            <div class="row-between">
+              <div class="row-wrap">
+                <button type="button" id="code-tab-worker" onclick="switchCodeTab('worker')" class="btn btn-navy">Cloudflare Worker (worker.js)</button>
+                <button type="button" id="code-tab-express" onclick="switchCodeTab('express')" class="btn btn-outline">Node / Express (server.js)</button>
+                <button type="button" id="code-tab-sql" onclick="switchCodeTab('sql')" class="btn btn-outline">Supabase PostgreSQL Schema</button>
+              </div>
+              <button type="button" onclick="copyActiveCode()" class="btn btn-green">📋 Copy Code</button>
+            </div>
+            <pre class="code-console"><code id="generated-code-block"></code></pre>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =====================================================================
+         5-STEP FIRST-TIME USER ONBOARDING MODAL
+         ===================================================================== -->
+    <div id="onboarding-modal" class="modal-backdrop hidden">
+      <div class="modal-card stack-md">
+        <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:10px;">
+          <div class="row-wrap">
+            <strong style="font-size:18px;color:#142D4E;">inField</strong>
+            <span id="onboarding-step-indicator" class="pill-gray">Step 1 of 5</span>
+          </div>
+          <button type="button" onclick="closeOnboardingModal()" class="btn btn-outline" style="padding:4px 10px;">✕</button>
+        </div>
+        <div id="onboarding-step-body" class="stack-md"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="toast-popup hidden" role="status" aria-live="polite">
+      <span id="toast-icon" style="font-size:18px;">🟢</span>
+      <div>
+        <strong id="toast-title" style="display:block;font-size:13px;">inField Update</strong>
+        <span id="toast-message" style="font-size:12px;color:#CBD5E1;"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // =========================================================================
+    // STATE & CORE LOGIC
+    // =========================================================================
+    let currentView = 'home';
+    let currentStatusFilter = 'all';
+    let selectedLeadId = 'lead-1';
+    let activeCodeTab = 'worker';
+    let showEmptyStatePreview = false;
+    let onboardingStep = 1;
+    let simStage = 'idle';
+    let simRingTimer = null;
+
+    const businessProfile = {
+      id: 'biz-mike-01',
+      ownerFirstName: 'Mike',
+      name: "Mike's Appliance Repair",
+      category: 'Appliance Repair',
+      phoneNumber: '(910) 335-8490',
+      forwardingNumber: '(910) 787-2450',
+      zipCode: '28445',
+      timezone: 'America/New_York',
+      businessHours: '8:00 AM – 6:00 PM (Mon–Sat)',
+      connectionStatus: 'connected'
+    };
+
+    const automationSettings = {
+      missedCallEnabled: true,
+      intakeEnabled: true,
+      followupEnabled: true,
+      afterHoursEnabled: true,
+      simulateAfterHoursNow: false,
+      followupDelayMinutes: 30,
+      initialMessageTemplate:
+        "Hey! Thanks for calling {business_name}. Sorry we missed your call! We're probably out helping another customer. What can we help you with today? Just reply here and we'll get back to you ASAP.",
+      followupTemplate:
+        "Hey! Just following up to make sure you got our message. If you still need help, just reply here and we'll get back to you!",
+      afterHoursTemplate:
+        "Thanks for reaching out to {business_name}! We're currently closed, but we'll get back to you when we're open. Feel free to text us what you need help with."
+    };
+
+    let baseMissedCallsCount = 8;
+    let baseAutoRepliesCount = 8;
+
+    let activityFeed = [
+      {
+        id: 'act-1',
+        time: '11:47 AM',
+        icon: '🔔',
+        title: 'New lead needs attention',
+        detail: '(910) 555-0142 • Refrigerator repair in Holly Ridge, NC (28445)',
+        leadId: 'lead-1'
+      },
+      {
+        id: 'act-2',
+        time: '11:45 AM',
+        icon: '💬',
+        title: 'Customer replied:',
+        detail: '"Need someone to fix my refrigerator." • ZIP: 28445',
+        leadId: 'lead-1'
+      },
+      {
+        id: 'act-3',
+        time: '11:42 AM',
+        icon: '📞',
+        title: 'Missed call from (910) 555-0142',
+        detail: '💬 Auto-reply sent',
+        leadId: 'lead-1'
+      }
+    ];
+
+    let leads = [
+      {
+        id: 'lead-1',
+        name: 'Caller (910) 555-0142',
+        phone: '(910) 555-0142',
+        trade: 'Appliance Repair',
+        service: 'Refrigerator repair',
+        location: 'Holly Ridge, NC (28445)',
+        status: 'New',
+        workflowStage: 'Photo Triaged',
+        timeAgo: '12 minutes ago',
+        automationBadge: 'Text Sent ✓',
+        source: 'Missed Call',
+        unread: true,
+        ownerTookOver: false,
+        optedOut: false,
+        followupScheduled: false,
+        modelTag: 'Whirlpool WRX735SDHZ02 • Refrigerator Not Cooling',
+        ocrDiagnosis: 'Start relay (#W10873791) or evaporator fan fault.',
+        eta: 'Today, 2:30 PM – 4:30 PM',
+        quoteItems: [
+          { desc: 'Compressor Start Relay & Capacitor Kit #W10873791', qty: 1, price: 95 },
+          { desc: 'Refrigerator Diagnostic & Install Labor', qty: 1, price: 110 }
+        ],
+        messages: [
+          { sender: 'system', time: '11:42 AM', text: '📞 Missed Call from (910) 555-0142 • Source: Missed Call' },
+          { sender: 'bot', time: '11:42 AM', text: "Hey! Thanks for calling Mike's Appliance Repair. Sorry we missed your call! We're probably out helping another customer. What can we help you with today? Just reply here and we'll get back to you ASAP." },
+          { sender: 'customer', time: '11:45 AM', text: 'My refrigerator stopped cooling.' },
+          { sender: 'bot', time: '11:45 AM', text: 'Got it! What area or ZIP code are you located in?' },
+          { sender: 'customer', time: '11:46 AM', text: '28445' },
+          { sender: 'bot', time: '11:46 AM', text: 'Thanks! Mike will get back to you as soon as he can.' }
+        ]
+      },
+      {
+        id: 'lead-2',
+        name: 'Sarah Jenkins',
+        phone: '(910) 555-0188',
+        trade: 'Appliance Repair',
+        service: 'Dishwasher not draining (Error F8E4)',
+        location: 'Jacksonville, NC (28546)',
+        status: 'New',
+        workflowStage: 'Photo Triaged',
+        timeAgo: '28 minutes ago',
+        automationBadge: 'Text Sent ✓',
+        source: 'Missed Call',
+        unread: true,
+        ownerTookOver: false,
+        optedOut: false,
+        followupScheduled: false,
+        modelTag: 'Whirlpool WDT750SAKZ0 • Serial: F94210884',
+        ocrDiagnosis: 'Error F8E4 — Drain Pump #W10876537 restriction (16–22 Ω check).',
+        eta: 'Today, 4:30 PM – 6:00 PM',
+        quoteItems: [
+          { desc: 'Drain Pump Assembly #W10876537 + Install', qty: 1, price: 165 },
+          { desc: 'Appliance Diagnostic & Multimeter Circuit Test', qty: 1, price: 85 }
+        ],
+        messages: [
+          { sender: 'system', time: '10:50 AM', text: '📞 Missed Call from (910) 555-0188 • Smart Intake Link Sent' },
+          { sender: 'bot', time: '10:50 AM', text: "Hey, I'm on a job right now! Tap here to snap a photo of what you need fixed - plus the model tag if it's an appliance - so I can text you a quote." },
+          { sender: 'customer', time: '10:55 AM', text: 'Dishwasher stopped draining in 28546. Attached model tag photo.', mediaTag: '📷 [MMS Image: whirlpool_WDT750SAKZ0_tag.jpg]' }
+        ]
+      },
+      {
+        id: 'lead-3',
+        name: 'Caller (910) 555-0199',
+        phone: '(910) 555-0199',
+        trade: 'Appliance Repair',
+        service: 'Awaiting customer response...',
+        location: 'Sneads Ferry, NC (28460)',
+        status: 'New',
+        workflowStage: 'Awaiting Photo',
+        timeAgo: '32 minutes ago',
+        automationBadge: 'Text Sent ✓',
+        source: 'Missed Call',
+        unread: true,
+        ownerTookOver: false,
+        optedOut: false,
+        followupScheduled: true,
+        modelTag: 'Pending customer reply...',
+        ocrDiagnosis: 'Initial missed-call SMS delivered. 30-min follow-up scheduled.',
+        eta: 'Tomorrow, 9:00 AM – 11:00 AM',
+        quoteItems: [{ desc: 'Appliance Diagnostic & Multimeter Circuit Test', qty: 1, price: 85 }],
+        messages: [
+          { sender: 'system', time: '10:40 AM', text: '📞 Missed Call from (910) 555-0199 • 30m Follow-Up Queued' },
+          { sender: 'bot', time: '10:40 AM', text: "Hey! Thanks for calling Mike's Appliance Repair. Sorry we missed your call! We're probably out helping another customer. What can we help you with today? Just reply here and we'll get back to you ASAP." }
+        ]
+      },
+      {
+        id: 'lead-4',
+        name: 'Rachel Dawson',
+        phone: '(910) 555-0173',
+        trade: 'Appliance Repair',
+        service: 'Dryer heating element replacement',
+        location: 'Jacksonville, NC (28540)',
+        status: 'Closed',
+        workflowStage: 'Paid & Reviewed',
+        timeAgo: 'Yesterday',
+        automationBadge: 'Text Sent ✓',
+        source: 'Missed Call',
+        unread: false,
+        ownerTookOver: true,
+        optedOut: false,
+        followupScheduled: false,
+        modelTag: 'Samsung DV42H5000EW/A3 • Heating Element #DC97-14486A',
+        ocrDiagnosis: 'Replaced heating element assembly and verified airflow.',
+        eta: 'Completed Yesterday',
+        quoteItems: [{ desc: 'Samsung Heating Element Kit #DC97-14486A + Labor', qty: 1, price: 235 }],
+        messages: [
+          { sender: 'system', time: 'Yesterday', text: '📞 Missed Call → Owner Replied → Closed ($235.00)' },
+          { sender: 'bot', time: 'Yesterday', text: '✅ Payment received! Thank you—here is our quick Google Review link: https://g.page/r/inField-Service/review' }
+        ]
+      }
+    ];
+
+    const scenarios = {
+      refrigerator: {
+        name: 'Caller (910) 555-0142',
+        phone: '(910) 555-0142',
+        trade: 'Appliance Repair',
+        service: 'Refrigerator repair',
+        location: 'Holly Ridge, NC (28445)',
+        symptomText: 'My refrigerator stopped cooling. Located in 28445.',
+        modelTag: 'Whirlpool WRX735SDHZ02 • Start Relay #W10873791',
+        ocrDiagnosis: 'Start relay / evaporator fan check.',
+        recommendedItems: [
+          { desc: 'Compressor Start Relay & Capacitor Kit #W10873791', qty: 1, price: 95 },
+          { desc: 'Diagnostic & Install Labor', qty: 1, price: 110 }
+        ],
+        eta: 'Today, 2:30 PM – 4:30 PM'
+      },
+      appliance: {
+        name: 'Sarah Jenkins',
+        phone: '(910) 555-0142',
+        trade: 'Appliance Repair',
+        service: 'Dishwasher not draining',
+        location: 'Jacksonville, NC 28546',
+        symptomText: 'Dishwasher stopped draining mid-cycle and flashes F8 E4.',
+        modelTag: 'Whirlpool WDT750SAKZ0 • Serial: F94210884',
+        ocrDiagnosis: 'Error F8E4 — Drain Pump #W10876537 restriction.',
+        recommendedItems: [
+          { desc: 'Drain Pump Assembly #W10876537 + Install', qty: 1, price: 165 },
+          { desc: 'Appliance Diagnostic & Multimeter Circuit Test', qty: 1, price: 85 }
+        ],
+        eta: 'Today, 3:30 PM – 5:00 PM'
+      },
+      grading: {
+        name: 'Mike Mercer',
+        phone: '(910) 555-0188',
+        trade: 'Grading & Erosion',
+        service: 'Culvert washout & silt fence repair',
+        location: 'Hubert, NC 28539',
+        symptomText: 'Heavy rain washed out 60ft of swale and silt fence by our culvert.',
+        modelTag: 'Site Inspection: 60ft Swale Undercut + 18" Culvert',
+        ocrDiagnosis: 'Skid steer grade pull + rip-rap stone apron + silt fence reset.',
+        recommendedItems: [{ desc: 'Skid Steer Ditch Cut, Culvert Grade & Silt Fence', qty: 1, price: 650 }],
+        eta: 'Wednesday, 8:00 AM – 12:00 PM'
+      },
+      handyman: {
+        name: 'Cynthia May',
+        phone: '(910) 555-0194',
+        trade: 'Handyman & Wash',
+        service: 'Deck & porch vinyl soft-wash',
+        location: 'Jacksonville, NC 28540',
+        symptomText: 'Need front porch vinyl and back deck pressure washed.',
+        modelTag: 'Exterior Estimate: ~1,100 sq ft Deck + Porch',
+        ocrDiagnosis: 'Sodium hypochlorite soft-wash treatment + surface cleaner pass.',
+        recommendedItems: [{ desc: 'Front/Back Porch Deck & Siding Pressure Wash', qty: 1, price: 325 }],
+        eta: 'Thursday, 1:00 PM – 4:00 PM'
+      }
+    };
+
+    let webhookLogs = [
+      {
+        time: '11:45:12 AM',
+        endpoint: 'POST /functions/v1/twilio-sms',
+        summary: 'Inbound SMS from (910) 555-0142: "My refrigerator stopped cooling." -> "28445"',
+        payload: 'MessageSid=SM99281a&From=%2B19105550142&Body=28445',
+        response: 'Lead #lead-1 Intake Completed -> Owner Push Sent'
+      },
+      {
+        time: '11:42:04 AM',
+        endpoint: 'POST /functions/v1/twilio-voice-status',
+        summary: 'DialCallStatus: no-answer • Missed-Call SMS Dispatched',
+        payload: 'CallSid=CA_INITIAL_01&From=%2B19105550142&DialCallStatus=no-answer',
+        response: 'Sent personalized SMS + Scheduled 30m follow-up event'
+      }
+    ];
+
+    function switchView(viewName) {
+      currentView = viewName;
+      const views = ['home', 'inbox', 'automations', 'settings', 'simulator', 'quote', 'setup'];
+      views.forEach((v) => {
+        const el = document.getElementById('view-' + v);
+        if (el) {
+          if (v === viewName) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        }
+      });
+
+      const navMap = {
+        home: 'tab-home',
+        inbox: 'tab-inbox',
+        automations: 'tab-automations',
+        settings: 'tab-settings'
+      };
+      Object.keys(navMap).forEach((k) => {
+        const btn = document.getElementById(navMap[k]);
+        if (!btn) return;
+        if (k === viewName || (['simulator', 'quote', 'setup'].includes(viewName) && k === 'settings')) {
+          btn.classList.add('nav-btn-active');
+        } else {
+          btn.classList.remove('nav-btn-active');
+        }
+      });
+
+      refreshAllUI();
+    }
+
+    function refreshAllUI() {
+      try {
+        updateKPIs();
+        renderHomeDashboard();
+        renderLeadsList();
+        renderLeadDetail();
+        renderAutomationControls();
+        renderSimulatorPhone();
+        renderWebhookLogs();
+        populateQuoteLeadDropdown();
+        renderQuoteBuilder();
+        updateGeneratedCode();
+      } catch (err) {
+        console.error('UI refresh error:', err);
+      }
+    }
+
+    function updateKPIs() {
+      const needsAttentionCount = leads.filter((l) => l.status === 'New').length;
+      document.getElementById('metric-missed-calls').textContent = String(baseMissedCallsCount);
+      document.getElementById('metric-auto-replies').textContent = String(baseAutoRepliesCount);
+      document.getElementById('metric-needs-attention').textContent = String(needsAttentionCount);
+
+      const badge = document.getElementById('nav-unread-badge');
+      if (badge) {
+        badge.textContent = String(needsAttentionCount);
+        badge.style.display = needsAttentionCount > 0 ? 'inline-block' : 'none';
+      }
+
+      const filterAllBtn = document.getElementById('filter-all');
+      if (filterAllBtn) filterAllBtn.textContent = 'All (' + leads.length + ')';
+    }
+
+    function showToast(title, message, icon) {
+      const toast = document.getElementById('toast-container');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-message').textContent = message;
+      document.getElementById('toast-icon').textContent = icon || '🟢';
+      toast.classList.remove('hidden');
+      if (window._toastTimer) clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    function triggerPushBanner(text) {
+      const bar = document.getElementById('push-notification-bar');
+      const txt = document.getElementById('push-notification-text');
+      if (bar && txt) {
+        txt.textContent = text;
+        bar.classList.remove('hidden');
+      }
+    }
+
+    function dismissPushBanner() {
+      const bar = document.getElementById('push-notification-bar');
+      if (bar) bar.classList.add('hidden');
+    }
+
+    function renderHomeDashboard() {
+      document.getElementById('home-welcome-heading').textContent =
+        'Good morning, ' + businessProfile.ownerFirstName + ' 👋';
+
+      const banner = document.getElementById('home-protection-banner');
+      const title = document.getElementById('home-status-title');
+      const sub = document.getElementById('home-status-subtitle');
+      const pill = document.getElementById('header-mode-pill');
+      const routeDot = document.getElementById('routing-indicator-dot');
+      const routeTxt = document.getElementById('routing-indicator-text');
+      const routeSub = document.getElementById('routing-numbers-sub');
+
+      const isActive =
+        automationSettings.missedCallEnabled && businessProfile.connectionStatus === 'connected';
+
+      if (isActive) {
+        banner.className = 'status-banner-active';
+        title.textContent = '🟢 inField is Active';
+        sub.textContent = '"Your missed calls are being handled."';
+        if (pill) pill.textContent = '🟢 Active Protection';
+      } else if (businessProfile.connectionStatus !== 'connected') {
+        banner.className = 'status-banner-warn';
+        title.textContent = '⚠️ Phone Setup Incomplete';
+        sub.textContent = 'Complete phone routing setup in Settings to activate protection.';
+        if (pill) pill.textContent = '⚠️ Setup Incomplete';
+      } else {
+        banner.className = 'status-banner-paused';
+        title.textContent = '⏸️ inField is Paused';
+        sub.textContent = 'Missed-Call Text Back is currently turned OFF.';
+        if (pill) pill.textContent = '⏸️ Paused';
+      }
+
+      routeDot.style.background = businessProfile.connectionStatus === 'connected' ? '#23B67A' : '#EF4444';
+      routeTxt.textContent =
+        businessProfile.connectionStatus === 'connected'
+          ? 'Phone Routing & SMS Connected'
+          : 'Phone Routing Disconnected';
+      routeSub.textContent =
+        'inField ' + businessProfile.phoneNumber + ' → Forwarding to ' + businessProfile.forwardingNumber;
+
+      const emptyEl = document.getElementById('home-empty-state');
+      const feedEl = document.getElementById('home-activity-feed');
+      const emptyBtn = document.getElementById('btn-toggle-empty');
+
+      if (showEmptyStatePreview || activityFeed.length === 0) {
+        emptyEl.classList.remove('hidden');
+        feedEl.classList.add('hidden');
+        if (emptyBtn) emptyBtn.textContent = 'Show Activity Feed';
+      } else {
+        emptyEl.classList.add('hidden');
+        feedEl.classList.remove('hidden');
+        if (emptyBtn) emptyBtn.textContent = 'Preview Empty State';
+        feedEl.innerHTML = activityFeed
+          .map(
+            (act) => `
+            <div class="infield-soft-box row-between">
+              <div class="row-wrap">
+                <span style="font-size:18px;">${act.icon}</span>
+                <div>
+                  <div>
+                    <span style="font-family:monospace;font-size:11.5px;color:#64748B;font-weight:700;">${act.time}</span>
+                    <strong style="font-size:13px;color:#111827;margin-left:6px;">${act.title}</strong>
+                  </div>
+                  <p style="font-size:12px;color:#64748B;margin-top:2px;">${act.detail}</p>
+                </div>
+              </div>
+              <button type="button" onclick="openLeadFromActivity('${act.leadId || 'lead-1'}')" class="btn btn-outline">
+                View Lead →
+              </button>
+            </div>
+          `
+          )
+          .join('');
+      }
+    }
+
+    function toggleEmptyStatePreview() {
+      showEmptyStatePreview = !showEmptyStatePreview;
+      renderHomeDashboard();
+    }
+
+    function openLeadFromActivity(leadId) {
+      selectedLeadId = leadId;
+      switchView('inbox');
+    }
+
+    function runDemoScenario(code) {
+      showEmptyStatePreview = false;
+
+      if (code === 'A') {
+        automationSettings.missedCallEnabled = true;
+        businessProfile.connectionStatus = 'connected';
+        baseMissedCallsCount += 1;
+        baseAutoRepliesCount += 1;
+
+        const tpl =
+          automationSettings.simulateAfterHoursNow && automationSettings.afterHoursEnabled
+            ? automationSettings.afterHoursTemplate
+            : automationSettings.initialMessageTemplate;
+        const msg = tpl.replace(/\{business_name\}/g, businessProfile.name);
+        const newId = 'lead-sim-' + Date.now();
+        const phone = '(910) 555-0164';
+
+        leads.unshift({
+          id: newId,
+          name: 'Caller ' + phone,
+          phone: phone,
+          trade: businessProfile.category,
+          service: 'Awaiting customer response...',
+          location: 'Pending ZIP code...',
+          status: 'New',
+          workflowStage: 'Awaiting Photo',
+          timeAgo: 'Just now',
+          automationBadge: 'Text Sent ✓',
+          source: 'Missed Call',
+          unread: true,
+          ownerTookOver: false,
+          optedOut: false,
+          followupScheduled: automationSettings.followupEnabled,
+          modelTag: 'Awaiting customer reply or photo...',
+          ocrDiagnosis: 'Missed call captured. Auto-SMS sent and 30-min follow-up scheduled.',
+          eta: 'Today, 4:00 PM – 6:00 PM',
+          quoteItems: [{ desc: 'Service Diagnostic & Inspection', qty: 1, price: 85 }],
+          messages: [
+            { sender: 'system', time: 'Just now', text: '📞 [DEMO] Missed Call from ' + phone },
+            { sender: 'bot', time: 'Just now', text: msg }
+          ]
+        });
+        selectedLeadId = newId;
+
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '📞',
+          title: 'Missed call from ' + phone,
+          detail: '💬 Auto-reply sent ("' + msg.slice(0, 60) + '...")',
+          leadId: newId
+        });
+
+        triggerPushBanner('📞 Missed call from ' + phone + ' — inField sent your automatic reply.');
+        showToast('Scenario A: Missed Call', 'Auto-SMS sent to ' + phone, '🟢');
+        refreshAllUI();
+      } else if (code === 'B') {
+        const target = leads[0];
+        target.service = 'Refrigerator stopped cooling';
+        target.location = 'Holly Ridge, NC (28445)';
+        target.status = 'New';
+        target.timeAgo = 'Just now';
+        target.followupScheduled = false;
+        target.messages.push(
+          { sender: 'customer', time: 'Just now', text: 'My refrigerator stopped cooling.' },
+          { sender: 'bot', time: 'Just now', text: 'Got it! What area or ZIP code are you located in?' },
+          { sender: 'customer', time: 'Just now', text: '28445' },
+          { sender: 'bot', time: 'Just now', text: 'Thanks! ' + businessProfile.ownerFirstName + ' will get back to you as soon as he can.' }
+        );
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '🔔',
+          title: 'Customer replied & intake completed',
+          detail: target.phone + ': "My refrigerator stopped cooling." • ZIP: 28445',
+          leadId: target.id
+        });
+        triggerPushBanner('🔔 New lead needs attention: ' + target.phone + ' (Refrigerator repair in 28445).');
+        showToast('Scenario B: Intake Saved', 'Service + ZIP 28445 captured.', '💬');
+        refreshAllUI();
+      } else if (code === 'C') {
+        const target = leads.find((l) => l.id === selectedLeadId) || leads[0];
+        target.ownerTookOver = true;
+        target.followupScheduled = false;
+        target.status = 'Contacted';
+        target.timeAgo = 'Just now';
+        target.messages.push({
+          sender: 'owner',
+          time: 'Just now',
+          text: 'Hey! This is ' + businessProfile.ownerFirstName + '. I can head your way around 3:00 PM.'
+        });
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '🙋‍♂️',
+          title: businessProfile.ownerFirstName + ' took over conversation with ' + target.phone,
+          detail: 'Automated intake & follow-up stopped • Marked Contacted',
+          leadId: target.id
+        });
+        showToast('Scenario C: Owner Takeover', 'Automated intake stopped; Lead marked Contacted.', '🙋‍♂️');
+        switchView('inbox');
+      } else if (code === 'D') {
+        const target = leads.find((l) => l.id === 'lead-3') || leads[0];
+        if (target.ownerTookOver || target.optedOut || !automationSettings.followupEnabled) {
+          showToast('Follow-Up Suppressed', 'Skipped because owner replied, caller opted out, or follow-up is OFF.', '🛡️');
+          return;
+        }
+        target.followupScheduled = false;
+        target.timeAgo = 'Just now';
+        baseAutoRepliesCount += 1;
+        target.messages.push({
+          sender: 'bot',
+          time: '+30m Delay',
+          text: automationSettings.followupTemplate
+        });
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '⏱️',
+          title: '30-minute follow-up sent to ' + target.phone,
+          detail: '"' + automationSettings.followupTemplate.slice(0, 55) + '..."',
+          leadId: target.id
+        });
+        showToast('Scenario D: 30m Follow-Up Sent', 'Sent single follow-up to ' + target.phone, '⏱️');
+        refreshAllUI();
+      } else if (code === 'E') {
+        automationSettings.missedCallEnabled = false;
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '⏸️',
+          title: 'Missed call while automation disabled',
+          detail: 'No automatic SMS was sent because Missed-Call Text Back is OFF.',
+          leadId: 'lead-1'
+        });
+        showToast('Scenario E: Automation Paused', 'Missed-Call Text Back turned OFF — 0 texts sent.', '⏸️');
+        refreshAllUI();
+      } else if (code === 'F') {
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '✅',
+          title: 'Inbound call answered live by owner',
+          detail: 'DialCallStatus: completed — No missed-call text triggered.',
+          leadId: 'lead-1'
+        });
+        showToast('Scenario F: Answered Call', 'Owner answered live — zero SMS sent.', '✅');
+        refreshAllUI();
+      } else if (code === 'G') {
+        activityFeed.unshift({
+          id: 'act-' + Date.now(),
+          time: 'Just now',
+          icon: '🛡️',
+          title: 'Duplicate webhook retry safely ignored',
+          detail: 'CallSid CA_INITIAL_01 already processed — prevented duplicate SMS.',
+          leadId: 'lead-1'
+        });
+        showToast('Scenario G: Duplicate Blocked', 'Webhook retry ignored via CallSid idempotency check.', '🛡️');
+        refreshAllUI();
+      } else if (code === 'THREE_STEP') {
+        selectedLeadId = 'lead-2';
+        switchView('inbox');
+        showToast('3-Step Workflow Loaded', 'Inspect Sarah Jenkins (Whirlpool WDT750SAKZ0) -> 1-Tap Estimate.', '🏷️');
+      }
+    }
+
+    function setStatusFilter(filterVal) {
+      currentStatusFilter = filterVal;
+      const buttons = [
+        ['all', 'filter-all'],
+        ['New', 'filter-new'],
+        ['Contacted', 'filter-contacted'],
+        ['Closed', 'filter-closed'],
+        ['Photo Triaged', 'filter-triaged'],
+        ['Awaiting Photo', 'filter-awaiting'],
+        ['Quote Sent', 'filter-quoted'],
+        ['Paid & Reviewed', 'filter-paid']
+      ];
+      buttons.forEach(([val, id]) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.className = val === filterVal ? 'btn btn-navy' : 'btn btn-outline';
+      });
+      renderLeadsList();
+    }
+
+    function getLeadStatusBadge(status) {
+      if (status === 'New') return '<span class="pill-green">New • Needs Reply</span>';
+      if (status === 'Contacted') return '<span class="pill-navy">Contacted</span>';
+      return '<span class="pill-gray">Closed</span>';
+    }
+
+    function renderLeadsList() {
+      const container = document.getElementById('leads-list-container');
+      if (!container) return;
+      const query = (document.getElementById('lead-search-input')?.value || '').toLowerCase().trim();
+
+      const filtered = leads.filter((l) => {
+        const matchesStatus =
+          currentStatusFilter === 'all' ||
+          l.status === currentStatusFilter ||
+          l.workflowStage === currentStatusFilter;
+        const matchesQuery =
+          !query ||
+          l.phone.toLowerCase().includes(query) ||
+          l.service.toLowerCase().includes(query) ||
+          l.location.toLowerCase().includes(query) ||
+          (l.modelTag || '').toLowerCase().includes(query);
+        return matchesStatus && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="infield-card" style="text-align:center;color:#64748B;">No customer leads match this filter.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered
+        .map((lead) => {
+          const isSelected = lead.id === selectedLeadId;
+          return `
+            <div onclick="selectLead('${lead.id}')" class="lead-card ${isSelected ? 'lead-card-selected' : ''}">
+              <div class="row-between">
+                <strong style="font-size:14px;color:#111827;">Customer: ${lead.phone}</strong>
+                ${getLeadStatusBadge(lead.status)}
+              </div>
+              <p style="font-size:12.5px;color:#111827;margin-top:6px;"><strong>Service:</strong> <span style="color:#475569;">${lead.service}</span></p>
+              <p style="font-size:12.5px;color:#111827;margin-top:2px;"><strong>Location:</strong> <span style="color:#475569;">${lead.location}</span></p>
+              <div class="row-between" style="margin-top:10px;padding-top:8px;border-top:1px solid #E5E7EB;font-size:11.5px;color:#64748B;">
+                <span>Last Activity: <strong style="color:#111827;">${lead.timeAgo}</strong></span>
+                <strong style="color:#23B67A;">Automation: ${lead.optedOut ? 'Opted Out (STOP)' : lead.automationBadge}</strong>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+    }
+
+    function selectLead(id) {
+      selectedLeadId = id;
+      const lead = leads.find((l) => l.id === id);
+      if (lead) lead.unread = false;
+      updateKPIs();
+      renderLeadsList();
+      renderLeadDetail();
+    }
+
+    function changeLeadStatus(leadId, newStatus) {
+      const lead = leads.find((l) => l.id === leadId);
+      if (!lead) return;
+      lead.status = newStatus;
+      if (newStatus === 'Contacted' || newStatus === 'Closed') {
+        lead.ownerTookOver = true;
+        lead.followupScheduled = false;
+      }
+      refreshAllUI();
+      showToast('Status Updated', lead.phone + ' marked as ' + newStatus, '✓');
+    }
+
+    function renderLeadDetail() {
+      const container = document.getElementById('lead-detail-container');
+      if (!container) return;
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+
+      const totalEst = lead.quoteItems.reduce((acc, i) => acc + i.qty * i.price, 0);
+
+      const messagesHTML = lead.messages
+        .map((m) => {
+          if (m.sender === 'system') {
+            return `<div class="bubble-system">${m.text} • ${m.time}</div>`;
+          }
+          if (m.sender === 'bot') {
+            return `
+              <div class="bubble-bot">
+                <div style="font-size:10px;opacity:0.8;margin-bottom:3px;">🤖 inField Auto-Assistant • ${m.time}</div>
+                <div>${m.text}</div>
+              </div>
+            `;
+          }
+          if (m.sender === 'owner') {
+            return `
+              <div class="bubble-owner">
+                <div style="font-size:10px;opacity:0.9;margin-bottom:3px;">🙋‍♂️ ${businessProfile.ownerFirstName} (Manual Reply) • ${m.time}</div>
+                <div>${m.text}</div>
+              </div>
+            `;
+          }
+          return `
+            <div class="bubble-customer">
+              <div style="font-size:10px;color:#64748B;margin-bottom:3px;">Customer ${lead.phone} • ${m.time}</div>
+              <div>${m.text}</div>
+              ${m.mediaTag ? `<div style="margin-top:6px;padding:6px 8px;background:#F1F5F9;border-radius:8px;font-family:monospace;font-size:11px;color:#142D4E;">${m.mediaTag}</div>` : ''}
+            </div>
+          `;
+        })
+        .join('');
+
+      container.innerHTML = `
+        <div class="infield-card stack-md">
+          <div class="row-between" style="border-bottom:1px solid #E5E7EB;padding-bottom:12px;">
+            <div>
+              <div class="row-wrap">
+                <h2 style="font-size:18px;font-weight:800;color:#111827;">${lead.phone}</h2>
+                ${getLeadStatusBadge(lead.status)}
+              </div>
+              <p style="font-size:12px;color:#64748B;margin-top:4px;">
+                <strong>Service:</strong> ${lead.service} • <strong>Location:</strong> ${lead.location} • <strong>Source:</strong> ${lead.source}
+              </p>
+            </div>
+            <div class="row-wrap">
+              <button type="button" onclick="initiateOneTapCall('${lead.phone}')" class="btn btn-green">📞 Call Customer</button>
+              <select aria-label="Lead Status" onchange="changeLeadStatus('${lead.id}', this.value)" class="select-field" style="width:auto;">
+                <option value="New" ${lead.status === 'New' ? 'selected' : ''}>Status: New</option>
+                <option value="Contacted" ${lead.status === 'Contacted' ? 'selected' : ''}>Status: Contacted</option>
+                <option value="Closed" ${lead.status === 'Closed' ? 'selected' : ''}>Status: Closed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row-between">
+            <strong style="font-size:12px;color:#64748B;text-transform:uppercase;">SMS Conversation History</strong>
+            <div class="row-wrap">
+              <button type="button" onclick="simulateCustomerStopOptOut('${lead.id}')" class="btn btn-outline" style="padding:4px 9px;font-size:11px;color:#BE123C;">Simulate STOP Opt-Out</button>
+              <button type="button" onclick="simulateCustomerPhotoReply('${lead.id}')" class="btn btn-outline" style="padding:4px 9px;font-size:11px;">+ Simulate Customer Reply</button>
+            </div>
+          </div>
+
+          <div class="chat-scroll">${messagesHTML}</div>
+
+          <div class="stack-sm">
+            <div class="row-wrap">
+              <button type="button" onclick="insertQuickReply('Hi! This is ${businessProfile.ownerFirstName}. I can come take a look today around 3:00 PM.')" class="btn btn-outline" style="padding:5px 10px;font-size:11.5px;">👋 "Can come by at 3:00 PM"</button>
+              <button type="button" onclick="insertQuickReply('Hey, I\\'m on a job right now! Tap here to snap a photo of what you need fixed - plus the model tag if it\\'s an appliance - so I can text you a quote.')" class="btn btn-outline" style="padding:5px 10px;font-size:11.5px;">📸 "Send Smart Photo Intake Link"</button>
+            </div>
+            <div class="row-wrap">
+              <input
+                type="text"
+                id="sms-reply-input"
+                onkeydown="if(event.key==='Enter') sendManualSMS('${lead.id}')"
+                placeholder="Reply manually as ${businessProfile.ownerFirstName} (pauses automated intake & marks Contacted)..."
+                class="input-field"
+                style="flex:1;"
+              />
+              <button type="button" onclick="sendManualSMS('${lead.id}')" class="btn btn-navy">Send Reply</button>
+            </div>
+          </div>
+
+          <!-- 3-Step Workflow Triage & 1-Tap Estimate Footer -->
+          <div class="infield-soft-box row-between">
+            <div>
+              <span class="pill-green">3-Step Smart Triage</span>
+              <strong style="display:block;font-size:12.5px;color:#111827;margin-top:4px;">🏷️ ${lead.modelTag}</strong>
+              <p style="font-size:12px;color:#64748B;">${lead.ocrDiagnosis}</p>
+            </div>
+            <div class="row-wrap">
+              <button type="button" onclick="openLeadInQuoteBuilder('${lead.id}')" class="btn btn-navy">🧾 1-Tap Estimate ($${totalEst.toFixed(0)})</button>
+              <button type="button" onclick="quickMarkPaid('${lead.id}')" class="btn btn-green">✅ Paid + Review Link</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function initiateOneTapCall(phone) {
+      showToast('Calling ' + phone, 'Launching phone dialer for 1-tap call...', '📞');
+    }
+
+    function insertQuickReply(text) {
+      const input = document.getElementById('sms-reply-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+      }
+    }
+
+    function sendManualSMS(leadId) {
+      const input = document.getElementById('sms-reply-input');
+      if (!input || !input.value.trim()) return;
+      const lead = leads.find((l) => l.id === leadId);
+      if (!lead) return;
+
+      lead.messages.push({ sender: 'owner', time: 'Just now', text: input.value.trim() });
+      lead.ownerTookOver = true;
+      lead.followupScheduled = false;
+      if (lead.status === 'New') lead.status = 'Contacted';
+      lead.timeAgo = 'Just now';
+      input.value = '';
+      refreshAllUI();
+      showToast('Manual Reply Sent', 'Automated intake paused & lead marked Contacted.', '✓');
+    }
+
+    function simulateCustomerStopOptOut(leadId) {
+      const lead = leads.find((l) => l.id === leadId);
+      if (!lead) return;
+      lead.optedOut = true;
+      lead.followupScheduled = false;
+      lead.messages.push(
+        { sender: 'customer', time: 'Just now', text: 'STOP' },
+        { sender: 'system', time: 'Just now', text: '🛑 Opt-Out recorded. All automated messages suppressed.' }
+      );
+      refreshAllUI();
+      showToast('STOP Opt-Out Recorded', 'All future automated texts suppressed for ' + lead.phone, '🛑');
+    }
+
+    function simulateCustomerPhotoReply(leadId) {
+      const lead = leads.find((l) => l.id === leadId);
+      if (!lead) return;
+      lead.service = 'Refrigerator cooling repair + Model Tag';
+      lead.location = 'Holly Ridge, NC (28445)';
+      lead.workflowStage = 'Photo Triaged';
+      lead.followupScheduled = false;
+      lead.timeAgo = 'Just now';
+      lead.messages.push({
+        sender: 'customer',
+        time: 'Just now',
+        text: 'Attached photo of the model tag inside the door (ZIP 28445).',
+        mediaTag: '📷 [MMS Image: model_sticker_verified.jpg]'
+      });
+      refreshAllUI();
+      showToast('Customer Reply Saved', 'Updated service & location on lead record.', '📸');
+    }
+
+    function openLeadInQuoteBuilder(leadId) {
+      selectedLeadId = leadId;
+      switchView('quote');
+    }
+
+    function quickMarkPaid(leadId) {
+      const lead = leads.find((l) => l.id === leadId);
+      if (!lead) return;
+      const total = lead.quoteItems.reduce((acc, i) => acc + i.qty * i.price, 0);
+      lead.status = 'Closed';
+      lead.workflowStage = 'Paid & Reviewed';
+      lead.messages.push({
+        sender: 'bot',
+        time: 'Just now',
+        text: '✅ Stripe Payment Confirmed ($' + total.toFixed(2) + '). Thank you! Quick Google Review link: https://g.page/r/inField-Service/review'
+      });
+      refreshAllUI();
+      showToast('Paid & Review Sent', 'Marked Closed & texted Google Review link.', '✅');
+    }
+
+    function toggleAutomationSetting(key) {
+      automationSettings[key] = !automationSettings[key];
+      renderAutomationControls();
+      renderHomeDashboard();
+      showToast('Automation Updated', key + ' is now ' + (automationSettings[key] ? 'ON' : 'OFF'), '⚡');
+    }
+
+    function renderAutomationControls() {
+      const pairs = [
+        ['missedCallEnabled', 'toggle-btn-missed', 'badge-toggle-missed'],
+        ['intakeEnabled', 'toggle-btn-intake', 'badge-toggle-intake'],
+        ['followupEnabled', 'toggle-btn-followup', 'badge-toggle-followup'],
+        ['afterHoursEnabled', 'toggle-btn-afterhours', 'badge-toggle-afterhours']
+      ];
+      let activeCount = 0;
+      pairs.forEach(([key, btnId, badgeId]) => {
+        const isOn = automationSettings[key];
+        if (isOn) activeCount += 1;
+        const btn = document.getElementById(btnId);
+        const badge = document.getElementById(badgeId);
+        if (btn) btn.className = 'toggle-switch ' + (isOn ? 'toggle-on' : 'toggle-off');
+        if (badge) {
+          badge.textContent = isOn ? 'ON' : 'OFF';
+          badge.className = isOn ? 'pill-green' : 'pill-gray';
+        }
+      });
+      const pill = document.getElementById('automations-summary-pill');
+      if (pill) pill.textContent = activeCount + ' of 4 Automations ON';
+      updateAutomationTemplates();
+    }
+
+    function useSmartIntakeTemplate() {
+      const el = document.getElementById('input-initial-template');
+      if (el) {
+        el.value =
+          "Hey, I'm on a job right now! Tap here to snap a photo of what you need fixed - plus the model tag if it's an appliance - so I can text you a quote.";
+        updateAutomationTemplates();
+        showToast('Smart Intake Link Set', 'Updated initial missed-call SMS template.', '📸');
+      }
+    }
+
+    function updateAutomationTemplates() {
+      const initEl = document.getElementById('input-initial-template');
+      const followEl = document.getElementById('input-followup-template');
+      const afterEl = document.getElementById('input-afterhours-template');
+      const chkAfter = document.getElementById('chk-sim-afterhours');
+
+      if (initEl) automationSettings.initialMessageTemplate = initEl.value;
+      if (followEl) automationSettings.followupTemplate = followEl.value;
+      if (afterEl) automationSettings.afterHoursTemplate = afterEl.value;
+      if (chkAfter) automationSettings.simulateAfterHoursNow = chkAfter.checked;
+
+      const activeTpl =
+        automationSettings.simulateAfterHoursNow && automationSettings.afterHoursEnabled
+          ? automationSettings.afterHoursTemplate
+          : automationSettings.initialMessageTemplate;
+
+      const prevInit = document.getElementById('live-sms-preview-initial');
+      if (prevInit) prevInit.textContent = activeTpl.replace(/\{business_name\}/g, businessProfile.name);
+      const prevConf = document.getElementById('live-sms-preview-confirm');
+      if (prevConf) prevConf.textContent = 'Thanks! ' + businessProfile.ownerFirstName + ' will get back to you as soon as he can.';
+    }
+
+    function saveBusinessProfile() {
+      businessProfile.name = document.getElementById('prof-biz-name')?.value || "Mike's Appliance Repair";
+      businessProfile.ownerFirstName = document.getElementById('prof-owner-name')?.value || 'Mike';
+      businessProfile.category = document.getElementById('prof-category')?.value || 'Appliance Repair';
+      businessProfile.zipCode = document.getElementById('prof-zip')?.value || '28445';
+      renderHomeDashboard();
+      updateAutomationTemplates();
+    }
+
+    function loadBrandonProfilePreset() {
+      document.getElementById('prof-biz-name').value = "RaiN's Innovative Solutions";
+      document.getElementById('prof-owner-name').value = 'Brandon';
+      document.getElementById('prof-category').value = 'Heavy Equipment & Grading';
+      document.getElementById('prof-zip').value = '28546';
+      saveBusinessProfile();
+      showToast('Profile Updated', "Loaded Brandon's Jacksonville, NC profile.", '✓');
+    }
+
+    function testPhoneRoutingConnection() {
+      businessProfile.connectionStatus = 'connected';
+      const badge = document.getElementById('settings-conn-badge');
+      if (badge) {
+        badge.textContent = 'Connected ✓';
+        badge.className = 'pill-green';
+      }
+      renderHomeDashboard();
+      showToast('Phone Line Verified', 'Forwarding & Twilio SMS webhooks are connected.', '🟢');
+    }
+
+    function togglePhoneConnectionStatus() {
+      if (businessProfile.connectionStatus === 'connected') {
+        businessProfile.connectionStatus = 'incomplete';
+        automationSettings.missedCallEnabled = false;
+        const badge = document.getElementById('settings-conn-badge');
+        if (badge) {
+          badge.textContent = 'Disconnected';
+          badge.className = 'pill-gray';
+        }
+        showToast('Line Disconnected', 'Phone routing and automations paused.', '⏸️');
+      } else {
+        testPhoneRoutingConnection();
+        automationSettings.missedCallEnabled = true;
+      }
+      refreshAllUI();
+    }
+
+    function openOnboardingModal() {
+      onboardingStep = 1;
+      document.getElementById('onboarding-modal').classList.remove('hidden');
+      renderOnboardingStep();
+    }
+
+    function closeOnboardingModal() {
+      document.getElementById('onboarding-modal').classList.add('hidden');
+    }
+
+    function nextOnboardingStep(step) {
+      onboardingStep = step;
+      renderOnboardingStep();
+    }
+
+    function renderOnboardingStep() {
+      const ind = document.getElementById('onboarding-step-indicator');
+      const body = document.getElementById('onboarding-step-body');
+      if (!ind || !body) return;
+      ind.textContent = 'Step ' + onboardingStep + ' of 5';
+
+      if (onboardingStep === 1) {
+        body.innerHTML = `
+          <div style="text-align:center;padding:12px 0;" class="stack-md">
+            <h3 style="font-size:21px;font-weight:800;color:#111827;">Never lose another customer to a missed call.</h3>
+            <p style="font-size:14px;color:#64748B;">"Meet <strong>inField</strong>. Your simple, automated missed-call assistant."</p>
+            <button type="button" onclick="nextOnboardingStep(2)" class="btn btn-navy" style="width:100%;padding:12px;">Get Started</button>
+          </div>
+        `;
+      } else if (onboardingStep === 2) {
+        body.innerHTML = `
+          <div class="stack-md">
+            <h3 style="font-size:17px;font-weight:800;">Step 2: Business Profile</h3>
+            <div class="grid-2">
+              <div><label style="font-size:12px;font-weight:700;">Business Name</label><input type="text" id="ob-biz-name" value="${businessProfile.name}" class="input-field" /></div>
+              <div><label style="font-size:12px;font-weight:700;">Owner's First Name</label><input type="text" id="ob-owner-name" value="${businessProfile.ownerFirstName}" class="input-field" /></div>
+              <div><label style="font-size:12px;font-weight:700;">Category</label><input type="text" id="ob-category" value="${businessProfile.category}" class="input-field" /></div>
+              <div><label style="font-size:12px;font-weight:700;">Existing Phone</label><input type="text" id="ob-phone" value="${businessProfile.forwardingNumber}" class="input-field" /></div>
+              <div><label style="font-size:12px;font-weight:700;">ZIP Code</label><input type="text" id="ob-zip" value="${businessProfile.zipCode}" class="input-field" /></div>
+              <div><label style="font-size:12px;font-weight:700;">Time Zone</label><input type="text" id="ob-tz" value="${businessProfile.timezone}" class="input-field" /></div>
+            </div>
+            <div class="row-between">
+              <button type="button" onclick="nextOnboardingStep(1)" class="btn btn-outline">Back</button>
+              <button type="button" onclick="saveOnboardingProfileAndContinue()" class="btn btn-navy">Continue →</button>
+            </div>
+          </div>
+        `;
+      } else if (onboardingStep === 3) {
+        body.innerHTML = `
+          <div class="stack-md">
+            <h3 style="font-size:17px;font-weight:800;">Step 3: Connect Phone Service</h3>
+            <p style="font-size:13px;color:#64748B;">inField number <strong>${businessProfile.phoneNumber}</strong> forwards calls to <strong>${businessProfile.forwardingNumber}</strong>.</p>
+            <div class="infield-soft-box">
+              <p style="font-size:12.5px;"><strong>Conditional Call Forwarding:</strong> Dial <code>*719103358490</code> on Verizon so unanswered calls route to inField automatically.</p>
+              <p style="font-size:12px;color:#23B67A;font-weight:700;margin-top:6px;">Connection Status: Tested &amp; Verified ✓</p>
+            </div>
+            <div class="row-between">
+              <button type="button" onclick="nextOnboardingStep(2)" class="btn btn-outline">Back</button>
+              <button type="button" onclick="nextOnboardingStep(4)" class="btn btn-navy">Continue →</button>
+            </div>
+          </div>
+        `;
+      } else if (onboardingStep === 4) {
+        const previewMsg = automationSettings.initialMessageTemplate.replace(/\{business_name\}/g, businessProfile.name);
+        body.innerHTML = `
+          <div class="stack-md">
+            <h3 style="font-size:17px;font-weight:800;">Step 4: Customize Automatic Reply</h3>
+            <textarea id="ob-template" rows="3" class="textarea-field">${automationSettings.initialMessageTemplate}</textarea>
+            <div class="bubble-bot" style="max-width:100%;">${previewMsg}</div>
+            <div class="row-between">
+              <button type="button" onclick="nextOnboardingStep(3)" class="btn btn-outline">Back</button>
+              <button type="button" onclick="saveOnboardingTemplateAndContinue()" class="btn btn-navy">Continue →</button>
+            </div>
+          </div>
+        `;
+      } else {
+        body.innerHTML = `
+          <div style="text-align:center;padding:12px 0;" class="stack-md">
+            <h3 style="font-size:21px;font-weight:800;color:#111827;">You're covered. 🟢</h3>
+            <p style="font-size:14px;color:#64748B;">"inField is ready to help catch your next missed opportunity."</p>
+            <button type="button" onclick="completeOnboardingAndActivate()" class="btn btn-green" style="width:100%;padding:12px;">Go to Dashboard</button>
+          </div>
+        `;
+      }
+    }
+
+    function saveOnboardingProfileAndContinue() {
+      businessProfile.name = document.getElementById('ob-biz-name')?.value || businessProfile.name;
+      businessProfile.ownerFirstName = document.getElementById('ob-owner-name')?.value || businessProfile.ownerFirstName;
+      nextOnboardingStep(3);
+    }
+
+    function saveOnboardingTemplateAndContinue() {
+      const val = document.getElementById('ob-template')?.value;
+      if (val) automationSettings.initialMessageTemplate = val;
+      nextOnboardingStep(5);
+    }
+
+    function completeOnboardingAndActivate() {
+      automationSettings.missedCallEnabled = true;
+      businessProfile.connectionStatus = 'connected';
+      closeOnboardingModal();
+      switchView('home');
+      showToast("You're covered. 🟢", 'inField is active and watching your line.', '🟢');
+    }
+
+    function selectSimulatorScenario() {
+      simStage = 'idle';
+      if (simRingTimer) clearTimeout(simRingTimer);
+      renderSimulatorPhone();
+    }
+
+    function updateSimTechMode() {
+      renderSimulatorPhone();
+    }
+
+    function renderSimulatorPhone() {
+      const screen = document.getElementById('sim-phone-screen');
+      if (!screen) return;
+      const key = document.getElementById('sim-scenario-select')?.value || 'refrigerator';
+      const scen = scenarios[key] || scenarios.refrigerator;
+
+      if (simStage === 'idle') {
+        screen.innerHTML = `
+          <div class="stack-sm">
+            <strong style="font-size:14px;">${scen.name} • ${scen.phone}</strong>
+            <p style="font-size:12px;color:#64748B;">"${scen.symptomText}"</p>
+            <p style="font-family:monospace;font-size:11.5px;color:#23B67A;">🏷️ ${scen.modelTag}</p>
+          </div>
+        `;
+      } else if (simStage === 'ringing') {
+        screen.innerHTML = `
+          <div style="text-align:center;padding:16px 0;" class="stack-sm">
+            <strong style="color:#142D4E;">📞 Forwarding Call to ${businessProfile.forwardingNumber}...</strong>
+            <button type="button" onclick="completeSimulatedCallBounce()" class="btn btn-green">Trigger Unanswered Call Now</button>
+          </div>
+        `;
+      } else if (simStage === 'bounced') {
+        screen.innerHTML = `
+          <div class="stack-sm">
+            <span class="pill-green">✓ Auto-Reply Sent via Twilio</span>
+            <div class="bubble-bot" style="max-width:100%;">${automationSettings.initialMessageTemplate.replace(/\{business_name\}/g, businessProfile.name)}</div>
+          </div>
+        `;
+      } else {
+        screen.innerHTML = `
+          <div class="stack-sm">
+            <span class="pill-green">✓ MMS Photo &amp; Model Tag Triaged</span>
+            <p style="font-size:12.5px;"><strong>${scen.modelTag}</strong> — ${scen.ocrDiagnosis}</p>
+          </div>
+        `;
+      }
+    }
+
+    function triggerSimulatedCall() {
+      const techMode = document.getElementById('sim-tech-mode')?.value || 'busy';
+      if (techMode === 'available') {
+        runDemoScenario('F');
+        return;
+      }
+      if (techMode === 'instant') {
+        completeSimulatedCallBounce();
+        return;
+      }
+      simStage = 'ringing';
+      renderSimulatorPhone();
+      if (simRingTimer) clearTimeout(simRingTimer);
+      simRingTimer = setTimeout(() => completeSimulatedCallBounce(), 1500);
+    }
+
+    function completeSimulatedCallBounce() {
+      if (simRingTimer) clearTimeout(simRingTimer);
+      simStage = 'bounced';
+      baseMissedCallsCount += 1;
+      baseAutoRepliesCount += 1;
+      renderSimulatorPhone();
+      updateKPIs();
+      showToast('Missed Call Detected', 'Twilio sent automatic SMS reply.', '🟢');
+    }
+
+    function triggerSimulatedMMS() {
+      const key = document.getElementById('sim-scenario-select')?.value || 'refrigerator';
+      const scen = scenarios[key] || scenarios.refrigerator;
+      simStage = 'mms_sent';
+      renderSimulatorPhone();
+
+      const newId = 'lead-' + (leads.length + 1);
+      leads.unshift({
+        id: newId,
+        name: scen.name,
+        phone: scen.phone,
+        trade: scen.trade,
+        service: scen.service,
+        location: scen.location,
+        status: 'New',
+        workflowStage: 'Photo Triaged',
+        timeAgo: 'Just now',
+        automationBadge: 'Text Sent ✓',
+        source: 'Missed Call',
+        unread: true,
+        ownerTookOver: false,
+        optedOut: false,
+        followupScheduled: false,
+        modelTag: scen.modelTag,
+        ocrDiagnosis: scen.ocrDiagnosis,
+        eta: scen.eta,
+        quoteItems: JSON.parse(JSON.stringify(scen.recommendedItems)),
+        messages: [
+          { sender: 'system', time: 'Just now', text: '📞 Missed Call from ' + scen.phone },
+          { sender: 'bot', time: 'Just now', text: automationSettings.initialMessageTemplate.replace(/\{business_name\}/g, businessProfile.name) },
+          { sender: 'customer', time: 'Just now', text: scen.symptomText, mediaTag: '📷 [MMS: ' + scen.modelTag + ']' }
+        ]
+      });
+      selectedLeadId = newId;
+      updateKPIs();
+      showToast('Lead Saved to Inbox', scen.phone + ' added with status: New.', '📥');
+    }
+
+    function openSimulatedLeadInInbox() {
+      switchView('inbox');
+    }
+
+    function renderWebhookLogs() {
+      const container = document.getElementById('webhook-log-stream');
+      if (!container) return;
+      if (webhookLogs.length === 0) {
+        container.innerHTML = '<p>Console cleared.</p>';
+        return;
+      }
+      container.innerHTML = webhookLogs
+        .map(
+          (log) => `
+          <div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #1E293B;">
+            <div style="color:#23B67A;font-weight:700;">${log.endpoint} (${log.time})</div>
+            <div style="color:#FFFFFF;font-weight:600;">${log.summary}</div>
+            <div style="color:#94A3B8;font-size:11px;">${log.payload}</div>
+            <div style="color:#38BDF8;font-size:11px;">${log.response}</div>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    function clearWebhookLogs() {
+      webhookLogs = [];
+      renderWebhookLogs();
+    }
+
+    function populateQuoteLeadDropdown() {
+      const sel = document.getElementById('quote-lead-select');
+      if (!sel) return;
+      sel.innerHTML = leads
+        .map((l) => `<option value="${l.id}" ${l.id === selectedLeadId ? 'selected' : ''}>${l.phone} — ${l.service}</option>`)
+        .join('');
+    }
+
+    function loadLeadIntoQuoteBuilder(leadId) {
+      selectedLeadId = leadId;
+      renderQuoteBuilder();
+    }
+
+    function renderQuoteBuilder() {
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+      const container = document.getElementById('quote-items-container');
+      if (!container) return;
+
+      container.innerHTML = lead.quoteItems
+        .map(
+          (item, idx) => `
+          <div class="infield-soft-box row-between">
+            <div>
+              <strong style="font-size:13px;">${item.desc}</strong>
+              <p style="font-size:11.5px;color:#64748B;">Qty: ${item.qty} × $${Number(item.price).toFixed(2)}</p>
+            </div>
+            <div class="row-wrap">
+              <strong style="font-family:monospace;color:#142D4E;">$${(item.qty * item.price).toFixed(2)}</strong>
+              <button type="button" onclick="removeQuoteItem(${idx})" class="btn btn-outline" style="padding:3px 8px;">✕</button>
+            </div>
+          </div>
+        `
+        )
+        .join('');
+      updateQuotePreview();
+    }
+
+    function addPresetLineItem(desc, qty, price) {
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+      lead.quoteItems.push({ desc, qty, price });
+      renderQuoteBuilder();
+      showToast('Added to Estimate', desc + ' ($' + price + ')', '🧾');
+    }
+
+    function addCustomQuoteItem() {
+      const descEl = document.getElementById('new-item-desc');
+      const qtyEl = document.getElementById('new-item-qty');
+      const priceEl = document.getElementById('new-item-price');
+      const desc = (descEl?.value || '').trim();
+      const qty = parseFloat(qtyEl?.value) || 1;
+      const price = parseFloat(priceEl?.value) || 0;
+      if (!desc || price <= 0) return;
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      lead.quoteItems.push({ desc, qty, price });
+      descEl.value = '';
+      priceEl.value = '';
+      renderQuoteBuilder();
+    }
+
+    function removeQuoteItem(idx) {
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+      lead.quoteItems.splice(idx, 1);
+      renderQuoteBuilder();
+    }
+
+    function updateQuotePreview() {
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+      const total = lead.quoteItems.reduce((acc, i) => acc + i.qty * i.price, 0);
+      document.getElementById('preview-customer-name').textContent = 'Prepared for ' + lead.phone;
+      document.getElementById('preview-total-amount').textContent = '$' + total.toFixed(2);
+      document.getElementById('preview-eta-text').textContent = document.getElementById('quote-eta-input')?.value || lead.eta;
+      document.getElementById('preview-warranty-text').textContent = document.getElementById('quote-warranty-input')?.value || '';
+      document.getElementById('preview-line-items').innerHTML = lead.quoteItems
+        .map((i) => `<div class="row-between"><span>• ${i.desc}</span><strong>$${(i.qty * i.price).toFixed(2)}</strong></div>`)
+        .join('');
+    }
+
+    function sendQuoteViaTwilio() {
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+      const total = lead.quoteItems.reduce((acc, i) => acc + i.qty * i.price, 0);
+      lead.status = 'Contacted';
+      lead.workflowStage = 'Quote Sent';
+      lead.ownerTookOver = true;
+      lead.messages.push({
+        sender: 'owner',
+        time: 'Just now',
+        text: 'Estimate for ' + lead.service + ': $' + total.toFixed(2) + '. Approve & pay via Stripe: https://buy.stripe.com/inField_' + lead.id
+      });
+      document.getElementById('quote-status-pill').textContent = 'Sent ✓';
+      showToast('Estimate Texted', 'Sent $' + total.toFixed(2) + ' quote to ' + lead.phone, '📲');
+    }
+
+    function simulateCustomerPayment() {
+      const lead = leads.find((l) => l.id === selectedLeadId) || leads[0];
+      if (!lead) return;
+      quickMarkPaid(lead.id);
+    }
+
+    function switchCodeTab(tab) {
+      activeCodeTab = tab;
+      ['worker', 'express', 'sql'].forEach((t) => {
+        const btn = document.getElementById('code-tab-' + t);
+        if (btn) btn.className = t === tab ? 'btn btn-navy' : 'btn btn-outline';
+      });
+      updateGeneratedCode();
+    }
+
+    function updateGeneratedCode() {
+      const twilioNum = document.getElementById('cfg-twilio-num')?.value || '+19103358490';
+      const cellNum = document.getElementById('cfg-cell-num')?.value || '+19107872450';
+      const domain = (document.getElementById('cfg-domain')?.value || 'https://infield.supabase.co/functions/v1').replace(/\/$/, '');
+      const timeout = document.getElementById('cfg-timeout')?.value || '15';
+      const carrier = document.getElementById('cfg-carrier')?.value || 'verizon';
+      const cleanDigits = twilioNum.replace(/\D/g, '');
+
+      const tipEl = document.getElementById('carrier-dial-tip');
+      if (tipEl) {
+        if (carrier === 'verizon') {
+          tipEl.innerHTML = '<strong>Verizon Conditional Forwarding:</strong> Dial <code>*71' + cleanDigits + '</code> to route unanswered calls to inField.';
+        } else if (carrier === 'att') {
+          tipEl.innerHTML = '<strong>AT&amp;T Conditional Forwarding:</strong> Dial <code>*61*' + cleanDigits + '#</code> and <code>*67*' + cleanDigits + '#</code>.';
+        } else if (carrier === 'tmobile') {
+          tipEl.innerHTML = '<strong>T-Mobile Conditional Forwarding:</strong> Dial <code>**61*+' + cleanDigits + '#</code>.';
+        } else {
+          tipEl.innerHTML = '<strong>Direct Business Line:</strong> Calls to <code>' + twilioNum + '</code> forward to <code>' + cellNum + '</code>.';
+        }
+      }
+
+      const workerCode = [
+        '// inField — Twilio Voice, Missed-Call & Intake Webhook Worker',
+        'export default {',
+        '  async fetch(request, env) {',
+        '    const url = new URL(request.url);',
+        '    if (url.pathname.endsWith("/twilio-voice") && request.method === "POST") {',
+        '      return new Response(',
+        '        `<?xml version="1.0" encoding="UTF-8"?><Response><Dial action="' + domain + '/twilio-voice-status" method="POST" timeout="' + timeout + '">' + cellNum + '</Dial></Response>`,',
+        '        { headers: { "Content-Type": "text/xml" } }',
+        '      );',
+        '    }',
+        '    if (url.pathname.endsWith("/twilio-voice-status") && request.method === "POST") {',
+        '      const form = await request.formData();',
+        '      const status = form.get("DialCallStatus");',
+        '      if (!["no-answer", "busy", "failed"].includes(status)) {',
+        '        return new Response("<Response/>", { headers: { "Content-Type": "text/xml" } });',
+        '      }',
+        '      // Send personalized missed-call SMS via Twilio REST API + schedule 30m follow-up',
+        '      return new Response("<Response><Hangup/></Response>", { headers: { "Content-Type": "text/xml" } });',
+        '    }',
+        '    return new Response("inField Active", { status: 200 });',
+        '  }',
+        '};'
+      ].join('\n');
+
+      const expressCode = [
+        '// inField — Node/Express Webhook Server (server.js)',
+        'const express = require("express");',
+        'const twilio = require("twilio");',
+        'const app = express();',
+        'app.use(express.urlencoded({ extended: false }));',
+        'const processedCalls = new Set();',
+        '',
+        'app.post("/api/twilio/voice", (req, res) => {',
+        '  const twiml = new twilio.twiml.VoiceResponse();',
+        '  twiml.dial({ action: "' + domain + '/api/twilio/voice-status", method: "POST", timeout: ' + timeout + ' }, "' + cellNum + '");',
+        '  res.type("text/xml").send(twiml.toString());',
+        '});',
+        '',
+        'app.post("/api/twilio/voice-status", async (req, res) => {',
+        '  const { CallSid, DialCallStatus, From } = req.body;',
+        '  if (processedCalls.has(CallSid) || !["no-answer", "busy", "failed"].includes(DialCallStatus)) {',
+        '    return res.type("text/xml").send("<Response/>");',
+        '  }',
+        '  processedCalls.add(CallSid);',
+        '  res.type("text/xml").send("<Response><Hangup/></Response>");',
+        '});'
+      ].join('\n');
+
+      const sqlCode = [
+        '-- inField PostgreSQL Schema (Supabase)',
+        'CREATE TABLE users (id UUID PRIMARY KEY, email TEXT UNIQUE NOT NULL, created_at TIMESTAMPTZ DEFAULT now());',
+        'CREATE TABLE businesses (id UUID PRIMARY KEY, owner_id UUID REFERENCES users(id), name TEXT, category TEXT, phone_number TEXT, forwarding_number TEXT, timezone TEXT, business_hours JSONB, connection_status TEXT);',
+        'CREATE TABLE leads (id UUID PRIMARY KEY, business_id UUID REFERENCES businesses(id), customer_phone TEXT, customer_name TEXT, service_description TEXT, location TEXT, status TEXT CHECK (status IN (\'New\',\'Contacted\',\'Closed\')), created_at TIMESTAMPTZ DEFAULT now(), updated_at TIMESTAMPTZ DEFAULT now());',
+        'CREATE TABLE calls (id UUID PRIMARY KEY, business_id UUID REFERENCES businesses(id), lead_id UUID REFERENCES leads(id), provider_call_id TEXT UNIQUE, caller_number TEXT, call_status TEXT, missed_call BOOLEAN, created_at TIMESTAMPTZ DEFAULT now());',
+        'CREATE TABLE messages (id UUID PRIMARY KEY, business_id UUID REFERENCES businesses(id), lead_id UUID REFERENCES leads(id), direction TEXT, message_body TEXT, delivery_status TEXT, provider_message_id TEXT UNIQUE, created_at TIMESTAMPTZ DEFAULT now());',
+        'CREATE TABLE automation_settings (business_id UUID PRIMARY KEY REFERENCES businesses(id), missed_call_enabled BOOLEAN, intake_enabled BOOLEAN, followup_enabled BOOLEAN, after_hours_enabled BOOLEAN, initial_message_template TEXT, followup_template TEXT, followup_delay_minutes INTEGER DEFAULT 30);',
+        'CREATE TABLE automation_events (id UUID PRIMARY KEY, business_id UUID REFERENCES businesses(id), lead_id UUID REFERENCES leads(id), event_type TEXT, execution_status TEXT, scheduled_for TIMESTAMPTZ, executed_at TIMESTAMPTZ);'
+      ].join('\n');
+
+      const block = document.getElementById('generated-code-block');
+      if (block) {
+        block.textContent = activeCodeTab === 'worker' ? workerCode : activeCodeTab === 'express' ? expressCode : sqlCode;
+      }
+    }
+
+    function copyActiveCode() {
+      const text = document.getElementById('generated-code-block')?.textContent || '';
+      if (!text) return;
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('Code Copied!', 'Copied to clipboard.', '📋');
+      } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    function updateChecklistProgress() {
+      const boxes = document.querySelectorAll('#launch-checklist input[type="checkbox"]');
+      let c = 0;
+      boxes.forEach((b) => { if (b.checked) c += 1; });
+      const el = document.getElementById('checklist-status-text');
+      if (el) el.textContent = c + ' of ' + boxes.length + ' deployment steps complete';
+    }
+
+    // Immediate & DOMContentLoaded initialization so Canvas never flashes blank
+    refreshAllUI();
+    window.addEventListener('DOMContentLoaded', refreshAllUI);
+  </script>
+</body>
+</html>
