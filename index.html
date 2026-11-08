@@ -2,7 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="inField helps service businesses capture missed calls, automate SMS follow-ups, and convert leads faster." />
+  <meta name="theme-color" content="#142D4E" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="inField" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="infield-supabase-functions-base-url" content="" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.svg" />
+  <link rel="apple-touch-startup-image" href="./icons/apple-touch-icon.svg" />
   <title>inField — Stay on the job. Never miss the opportunity.</title>
   <style>
     /* =====================================================================
@@ -45,6 +56,7 @@
 
     html, body {
       min-height: 100%;
+      min-height: 100dvh;
       background-color: #F8FAFC !important;
       color: #111827 !important;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -61,6 +73,7 @@
     /* Layout Containers */
     .app-shell {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       background-color: var(--bg-primary);
@@ -70,9 +83,16 @@
       position: sticky;
       top: 0;
       z-index: 40;
+      padding-top: env(safe-area-inset-top);
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
+    }
+
+    .app-main {
+      padding-top: 22px;
+      padding-bottom: calc(44px + env(safe-area-inset-bottom));
+      flex: 1;
     }
 
     .container-main {
@@ -543,7 +563,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: calc(16px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
     }
     .modal-card {
       background: #FFFFFF;
@@ -558,8 +578,8 @@
     /* Toast */
     .toast-popup {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: calc(20px + env(safe-area-inset-bottom));
+      right: calc(20px + env(safe-area-inset-right));
       z-index: 70;
       background: var(--brand-navy);
       color: #FFFFFF;
@@ -671,7 +691,7 @@
     <!-- =====================================================================
          MAIN WORKSPACE
          ===================================================================== -->
-    <main class="container-main" style="padding-top:22px;padding-bottom:44px;flex:1;">
+    <main class="container-main app-main">
 
       <!-- ===================================================================
            TAB 1: HOME DASHBOARD
@@ -1299,7 +1319,7 @@
             </div>
             <div>
               <label for="cfg-domain" style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;">Webhook Base URL</label>
-              <input type="text" id="cfg-domain" value="https://infield.supabase.co/functions/v1" oninput="updateGeneratedCode()" class="input-field" />
+              <input type="text" id="cfg-domain" value="" placeholder="Set via runtime config or environment" oninput="updateGeneratedCode()" class="input-field" />
             </div>
             <div class="grid-2">
               <div>
@@ -1374,6 +1394,13 @@
     // =========================================================================
     // STATE & CORE LOGIC
     // =========================================================================
+    const runtimeConfig = {
+      supabaseFunctionsBaseUrl:
+        ((window.__INFIELD_CONFIG__ && window.__INFIELD_CONFIG__.supabaseFunctionsBaseUrl) ||
+        document.querySelector('meta[name="infield-supabase-functions-base-url"]')?.getAttribute('content') ||
+        '').trim()
+    };
+
     let currentView = 'home';
     let currentStatusFilter = 'all';
     let selectedLeadId = 'lead-1';
@@ -1628,6 +1655,17 @@
         response: 'Sent personalized SMS + Scheduled 30m follow-up event'
       }
     ];
+
+    function getDefaultWebhookBaseUrl() {
+      return runtimeConfig.supabaseFunctionsBaseUrl || (window.location.origin.replace(/\/$/, '') + '/functions/v1');
+    }
+
+    function initializeRuntimeConfigUI() {
+      const domainInput = document.getElementById('cfg-domain');
+      if (domainInput && !domainInput.value.trim()) {
+        domainInput.value = getDefaultWebhookBaseUrl();
+      }
+    }
 
     function switchView(viewName) {
       currentView = viewName;
@@ -2718,7 +2756,7 @@
     function updateGeneratedCode() {
       const twilioNum = document.getElementById('cfg-twilio-num')?.value || '+19103358490';
       const cellNum = document.getElementById('cfg-cell-num')?.value || '+19107872450';
-      const domain = (document.getElementById('cfg-domain')?.value || 'https://infield.supabase.co/functions/v1').replace(/\/$/, '');
+      const domain = (document.getElementById('cfg-domain')?.value || getDefaultWebhookBaseUrl()).replace(/\/$/, '');
       const timeout = document.getElementById('cfg-timeout')?.value || '15';
       const carrier = document.getElementById('cfg-carrier')?.value || 'verizon';
       const cleanDigits = twilioNum.replace(/\D/g, '');
@@ -2802,18 +2840,44 @@
       }
     }
 
-    function copyActiveCode() {
-      const text = document.getElementById('generated-code-block')?.textContent || '';
-      if (!text) return;
+    function copyWithExecCommand(text) {
       const ta = document.createElement('textarea');
       ta.value = text;
+      ta.setAttribute('readonly', 'readonly');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
       document.body.appendChild(ta);
       ta.select();
       try {
         document.execCommand('copy');
+        return true;
+      } catch (e) {
+        return false;
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+
+    function copyActiveCode() {
+      const text = document.getElementById('generated-code-block')?.textContent || '';
+      if (!text) return;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(
+          () => showToast('Code Copied!', 'Copied to clipboard.', '📋'),
+          () => {
+            const copied = copyWithExecCommand(text);
+            if (copied) showToast('Code Copied!', 'Copied to clipboard.', '📋');
+            else showToast('Copy Failed', 'Please copy manually.', '⚠️');
+          }
+        );
+        return;
+      }
+      const copied = copyWithExecCommand(text);
+      if (copied) {
         showToast('Code Copied!', 'Copied to clipboard.', '📋');
-      } catch (e) {}
-      document.body.removeChild(ta);
+      } else {
+        showToast('Copy Failed', 'Please copy manually.', '⚠️');
+      }
     }
 
     function updateChecklistProgress() {
@@ -2825,8 +2889,18 @@
     }
 
     // Immediate & DOMContentLoaded initialization so Canvas never flashes blank
+    initializeRuntimeConfigUI();
     refreshAllUI();
-    window.addEventListener('DOMContentLoaded', refreshAllUI);
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initializeRuntimeConfigUI();
+      refreshAllUI();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js').catch((err) => {
+          console.error('Service worker registration failed:', err);
+        });
+      }
+    });
   </script>
 </body>
 </html>
